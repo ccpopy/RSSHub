@@ -34136,6 +34136,44 @@ export default {
         "location": "news.ts",
         "module": () => import('@/routes/dgtle/news.ts')
       },
+      "/tag/:id": {
+        "path": "/tag/:id",
+        "name": "标签",
+        "url": "www.dgtle.com",
+        "maintainers": [
+          "nczitzk"
+        ],
+        "example": "/dgtle/tag/394",
+        "parameters": {
+          "id": {
+            "description": "标签 ID，可在对应标签页 URL 中找到"
+          }
+        },
+        "description": ":::tip\n订阅 [#手机讨论区](https://www.dgtle.com/tag-394-1.html)，其源网址为 `https://www.dgtle.com/tag-394-1.html`，请参考该 URL 指定部分构成参数，此时路由为 [`/dgtle/tag/394`](https://rsshub.app/dgtle/tag/394)。\n:::\n",
+        "categories": [
+          "new-media"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportRadar": true,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "www.dgtle.com/$tag-:id-\\d+.html"
+            ],
+            "target": "/tag/:id"
+          }
+        ],
+        "view": 0,
+        "location": "tag.ts",
+        "module": () => import('@/routes/dgtle/tag.ts')
+      },
       "/video": {
         "path": "/video",
         "name": "视频",
