@@ -10074,6 +10074,7 @@
           "programming"
         ],
         "example": "/anthropic/engineering",
+        "parameters": {},
         "radar": [
           {
             "source": [
@@ -20445,6 +20446,67 @@
     "apiRoutes": {},
     "url": "cste.org.cn",
     "lang": "zh-CN"
+  },
+  "canada.ca": {
+    "routes": {
+      "/news/:lang/:department?": {
+        "path": "/news/:lang/:department?",
+        "categories": [
+          "government"
+        ],
+        "example": "/canada.ca/news/en/departmentfinance",
+        "parameters": {
+          "lang": "Language, en or fr",
+          "department": "dprtmnt query value"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "www.canada.ca/:lang/department-finance.html",
+              "www.canada.ca/:lang/ministere-finances.html",
+              "www.canada.ca/:lang/department-finance/news/*",
+              "www.canada.ca/:lang/ministere-finances/nouvelles/*"
+            ],
+            "target": "/news/:lang/departmentfinance"
+          },
+          {
+            "source": [
+              "ised-isde.canada.ca/site/ised/:lang",
+              "ised-isde.canada.ca/site/isde/:lang",
+              "www.canada.ca/:lang/innovation-science-economic-development/news/*",
+              "www.canada.ca/:lang/innovation-sciences-developpement-economique/nouvelles/*"
+            ],
+            "target": "/news/:lang/departmentofindustry"
+          },
+          {
+            "source": [
+              "www.canada.ca/:lang/news/advanced-news-search/news-results.html",
+              "www.canada.ca/:lang/nouvelles/recherche-avancee-de-nouvelles/resultats-de-nouvelles.html"
+            ],
+            "target": "/news/:lang"
+          }
+        ],
+        "name": "News by Department",
+        "maintainers": [
+          "elibroftw"
+        ],
+        "description": "News from specific Canadian government departments",
+        "location": "news.ts",
+        "module": "() => import('@/routes/canada.ca/news.ts')"
+      }
+    },
+    "name": "Canada.ca",
+    "url": "www.canada.ca",
+    "description": "Government of Canada news by department",
+    "lang": "en"
   },
   "cankaoxiaoxi": {
     "routes": {
