@@ -16384,7 +16384,8 @@ export default {
           "hyoban"
         ],
         "categories": [
-          "social-media"
+          "social-media",
+          "popular"
         ],
         "view": 3,
         "example": "/bilibili/ranking/all",
@@ -116597,6 +116598,50 @@ export default {
     "apiRoutes": {},
     "url": "www.theblockbeats.info",
     "lang": "zh-CN"
+  },
+  "thebrain": {
+    "routes": {
+      "/blog": {
+        "path": "/blog",
+        "name": "Blog",
+        "url": "www.thebrain.com",
+        "maintainers": [
+          "nczitzk"
+        ],
+        "example": "/thebrain/blog",
+        "categories": [
+          "new-media"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportRadar": true,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "www.thebrain.com/blog"
+            ],
+            "target": "/blog"
+          }
+        ],
+        "view": 0,
+        "location": "blog.ts",
+        "module": () => import('@/routes/thebrain/blog.ts')
+      }
+    },
+    "name": "TheBrain",
+    "apiRoutes": {},
+    "url": "thebrain.com",
+    "categories": [
+      "new-media"
+    ],
+    "description": "",
+    "lang": "en"
   },
   "thecover": {
     "routes": {
