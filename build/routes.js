@@ -99503,6 +99503,43 @@ export default {
     "url": "readhub.cn",
     "lang": "zh-CN"
   },
+  "readsomethingwonderful": {
+    "routes": {
+      "/": {
+        "path": "/",
+        "name": "Articles",
+        "categories": [
+          "blog"
+        ],
+        "example": "/readsomethingwonderful",
+        "parameters": {},
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "readsomethingwonderful.com/"
+            ]
+          }
+        ],
+        "maintainers": [
+          "ttttmr"
+        ],
+        "location": "index.ts",
+        "module": () => import('@/routes/readsomethingwonderful/index.ts')
+      }
+    },
+    "name": "Read Something Wonderful",
+    "apiRoutes": {},
+    "url": "readsomethingwonderful.com",
+    "lang": "en"
+  },
   "readwise": {
     "routes": {
       "/list/:routeParams?": {
