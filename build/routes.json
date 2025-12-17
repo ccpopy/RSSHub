@@ -127711,6 +127711,44 @@
     "url": "x-mol.com",
     "lang": "zh-CN"
   },
+  "x410": {
+    "name": "x410",
+    "routes": {
+      "/news": {
+        "path": "/news",
+        "name": "News",
+        "url": "x410.dev",
+        "maintainers": [
+          "nczitzk"
+        ],
+        "example": "/x410/news",
+        "categories": [
+          "new-media"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportRadar": true,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "x410.dev"
+            ],
+            "target": "/news"
+          }
+        ],
+        "view": 0,
+        "location": "news.ts",
+        "module": "() => import('@/routes/x410/news.ts')"
+      }
+    },
+    "apiRoutes": {}
+  },
   "x6d": {
     "routes": {
       "/:id?": {
