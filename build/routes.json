@@ -19132,6 +19132,28 @@
     "description": "::: tip\n  (1-9)bt0.com 都指向同一个\n:::",
     "lang": "zh-CN"
   },
+  "btbtla": {
+    "routes": {
+      "/gxlist": {
+        "categories": [
+          "multimedia"
+        ],
+        "example": "/btbtla/gxlist",
+        "maintainers": [
+          "Hermes1030"
+        ],
+        "name": "BTBTLA",
+        "path": "/gxlist",
+        "url": "btbtla.com/tt/gxlist.html",
+        "location": "gxlist.ts",
+        "module": "() => import('@/routes/btbtla/gxlist.ts')"
+      }
+    },
+    "name": "BT影视",
+    "apiRoutes": {},
+    "url": "btbtla.com",
+    "description": "BT影视更新列表"
+  },
   "btzj": {
     "routes": {
       "/:category?": {
