@@ -104792,6 +104792,56 @@ export default {
     "url": "sehuatang.net",
     "lang": "zh-CN"
   },
+  "semiconductors": {
+    "routes": {
+      "/:category{.+}?": {
+        "path": "/:category{.+}?",
+        "name": "Latest News",
+        "url": "www.semiconductors.org",
+        "maintainers": [
+          "nczitzk"
+        ],
+        "example": "/semiconductors/news-events/latest-news",
+        "parameters": {
+          "category": {
+            "description": "Category, `news-events/latest-news` by default"
+          }
+        },
+        "description": ":::tip\nTo subscribe to [Latest News](https://www.semiconductors.org/news-events/latest-news/), where the source URL is `https://www.semiconductors.org/news-events/latest-news/`, extract the certain parts from this URL to be used as parameters, resulting in the route as [`/semiconductors/news-events/latest-news`](https://rsshub.app/semiconductors/news-events/latest-news).\n:::",
+        "categories": [
+          "new-media"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportRadar": true,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "www.semiconductors.org/:category"
+            ],
+            "target": "/:category"
+          }
+        ],
+        "view": 0,
+        "location": "index.ts",
+        "module": () => import('@/routes/semiconductors/index.ts')
+      }
+    },
+    "name": "Semiconductor Industry Association",
+    "apiRoutes": {},
+    "url": "semiconductors.org",
+    "categories": [
+      "new-media"
+    ],
+    "description": "",
+    "lang": "en"
+  },
   "sensortower": {
     "routes": {
       "/blog/:language?": {
