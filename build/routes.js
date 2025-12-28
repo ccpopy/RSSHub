@@ -19134,6 +19134,30 @@ export default {
   },
   "btbtla": {
     "routes": {
+      "/detail/:name": {
+        "path": "/detail/:name",
+        "categories": [
+          "multimedia"
+        ],
+        "example": "/btbtla/detail/雍正王朝",
+        "parameters": {
+          "name": "电影 | 电视剧名称"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": true,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "name": "BTBTLA | 指定剧名",
+        "maintainers": [
+          "Hermes1030"
+        ],
+        "location": "detail.ts",
+        "module": () => import('@/routes/btbtla/detail.ts')
+      },
       "/gxlist": {
         "categories": [
           "multimedia"
@@ -19142,7 +19166,7 @@ export default {
         "maintainers": [
           "Hermes1030"
         ],
-        "name": "BTBTLA",
+        "name": "BTBTLA | 最近更新",
         "path": "/gxlist",
         "url": "btbtla.com/tt/gxlist.html",
         "location": "gxlist.ts",
@@ -19151,8 +19175,8 @@ export default {
     },
     "name": "BT影视",
     "apiRoutes": {},
-    "url": "btbtla.com",
-    "description": "BT影视更新列表"
+    "url": "www.btbtla.com",
+    "description": "BT影视的页面内容，最近更新列表，视频种子列表。"
   },
   "btzj": {
     "routes": {
@@ -33713,6 +33737,88 @@ export default {
     "apiRoutes": {},
     "url": "delta.io",
     "lang": "en"
+  },
+  "denonbu": {
+    "routes": {
+      "/news/:area?": {
+        "url": "denonbu.jp",
+        "path": "/news/:area?",
+        "categories": [
+          "anime"
+        ],
+        "example": "/denonbu/news/azabu",
+        "parameters": {
+          "area": "The id of the area or category; values are as follows."
+        },
+        "description": "**Area**\n| ID            | Group name/Area name                             |\n| ------------- | ------------------------------------------------ |\n| akiba         | 外神田文芸高校                                   |\n| harajuku      | 神宮前参道學園                                   |\n| azabu         | 港白金女学院                                     |\n| shibuya       | 帝音国際学院                                     |\n| kabuki        | 真新宿GR学園                                     |\n| deep-okubo    | Bellemule（深大久保DJ＆ダンスアカデミー）        |\n| deep-okubo-k  | 輝きノスタルジア（深大久保DJ＆ダンスアカデミー） |\n| shinsaibashi  | OKINI☆PARTY'S（心斎橋演芸高校）                  |\n| ikebukuro     | 池袋電音部（池袋空乗院高校）                     |\n| neotokyo      | 東京電脳（東京電脳学園）                         |\n| neonakano     | 中野電脳（中野電脳学園）                         |\n| shimokitazawa | Ma'Scar'Piece（北沢音箱高校）                    |\n\n**Category**\nWorking category IDs include `news` (the default), `event`, `goods`, `comic`, `movie`, `music` or `livearchives`.\n\n",
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "denonbu.jp/news"
+            ],
+            "target": "/news"
+          },
+          {
+            "source": [
+              "denonbu.jp/event"
+            ],
+            "target": "/news/event"
+          },
+          {
+            "source": [
+              "denonbu.jp/goods"
+            ],
+            "target": "/news/goods"
+          },
+          {
+            "source": [
+              "denonbu.jp/comic"
+            ],
+            "target": "/news/comic"
+          },
+          {
+            "source": [
+              "denonbu.jp/movie"
+            ],
+            "target": "/news/movie"
+          },
+          {
+            "source": [
+              "denonbu.jp/music"
+            ],
+            "target": "/news/music"
+          },
+          {
+            "source": [
+              "denonbu.jp/livearchives"
+            ],
+            "target": "/news/livearchives"
+          },
+          {
+            "source": [
+              "denonbu.jp/area/:area"
+            ],
+            "target": "/news/:area"
+          }
+        ],
+        "name": "新闻",
+        "maintainers": [
+          "outloudvi"
+        ],
+        "location": "news.ts",
+        "module": () => import('@/routes/denonbu/news.ts')
+      }
+    },
+    "name": "電音部",
+    "url": "denonbu.jp"
   },
   "dev.to": {
     "routes": {
