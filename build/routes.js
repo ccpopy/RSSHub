@@ -16384,7 +16384,8 @@ export default {
           "hyoban"
         ],
         "categories": [
-          "social-media"
+          "social-media",
+          "popular"
         ],
         "view": 3,
         "example": "/bilibili/ranking/all",
@@ -42955,13 +42956,37 @@ export default {
             ]
           }
         ],
-        "name": "FoodTalks global food information network",
+        "name": "最新资讯",
         "maintainers": [
           "Geraldxm"
         ],
         "url": "www.foodtalks.cn",
         "location": "index.ts",
         "module": () => import('@/routes/foodtalks/index.ts')
+      },
+      "/news/tag/:tagId": {
+        "path": "/news/tag/:tagId",
+        "parameters": {
+          "tagId": "标签 ID"
+        },
+        "categories": [
+          "new-media"
+        ],
+        "example": "/foodtalks/news/tag/13335",
+        "radar": [
+          {
+            "source": [
+              "www.foodtalks.cn/news/tag/:tagId"
+            ]
+          }
+        ],
+        "name": "标签",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "url": "www.foodtalks.cn",
+        "location": "tag.ts",
+        "module": () => import('@/routes/foodtalks/tag.ts')
       }
     },
     "name": "FoodTalks全球食品资讯网",
