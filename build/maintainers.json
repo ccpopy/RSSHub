@@ -1001,8 +1001,9 @@
   "/bilibili/weekly/:embed?": [
     "ttttmr"
   ],
-  "/binance/announcement/:type": [
-    "enpitsulin"
+  "/binance/announcement/:type?/:lang?": [
+    "enpitsulin",
+    "DIYgod"
   ],
   "/binance/launchpool": [
     "zhenlohuang"

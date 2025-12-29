@@ -16808,19 +16808,30 @@
   },
   "binance": {
     "routes": {
-      "/announcement/:type": {
-        "path": "/announcement/:type",
+      "/announcement/:type?/:lang?": {
+        "path": "/announcement/:type?/:lang?",
         "categories": [
-          "finance",
-          "popular"
+          "finance"
         ],
         "view": 0,
         "example": "/binance/announcement/new-cryptocurrency-listing",
+        "radar": [
+          {
+            "source": [
+              "www.binance.com/:lang/messages/v2/group/announcement"
+            ],
+            "target": "/binance/announcement/all/:lang"
+          }
+        ],
         "parameters": {
           "type": {
-            "description": "Binance Announcement type",
-            "default": "new-cryptocurrency-listing",
+            "description": "Announcement type. Omit for all categories.",
+            "default": "all",
             "options": [
+              {
+                "value": "all",
+                "label": "All"
+              },
               {
                 "value": "new-cryptocurrency-listing",
                 "label": "New Cryptocurrency Listing"
@@ -16854,12 +16865,27 @@
                 "label": "Delisting"
               }
             ]
+          },
+          "lang": {
+            "description": "Language code for the messages page.",
+            "default": "zh-CN",
+            "options": [
+              {
+                "value": "zh-CN",
+                "label": "Simplified Chinese"
+              },
+              {
+                "value": "en",
+                "label": "English"
+              }
+            ]
           }
         },
         "name": "Announcement",
-        "description": "\nType category\n\n - new-cryptocurrency-listing => New Cryptocurrency Listing\n - latest-binance-news        => Latest Binance News\n - latest-activities          => Latest Activities\n - new-fiat-listings          => New Fiat Listings\n - api-updates                => API Updates\n - crypto-airdrop             => Crypto Airdrop\n - wallet-maintenance-updates => Wallet Maintenance Updates\n - delisting                  => Delisting\n",
+        "description": "Announcement list from Binance message center with language and type selection.",
         "maintainers": [
-          "enpitsulin"
+          "enpitsulin",
+          "DIYgod"
         ],
         "location": "announcement.ts",
         "module": "() => import('@/routes/binance/announcement.ts')"
