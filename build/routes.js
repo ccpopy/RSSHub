@@ -119546,16 +119546,17 @@ export default {
         "radar": [
           {
             "source": [
-              "jlwater.com/portal/10000013",
+              "jlwater.com/portal/10000015",
               "jlwater.com/"
             ]
           }
         ],
         "name": "南京市",
         "maintainers": [
-          "ocleo1"
+          "ocleo1",
+          "pseudoyu"
         ],
-        "url": "jlwater.com/portal/10000013",
+        "url": "jlwater.com/portal/10000015",
         "location": "nanjing.ts",
         "module": () => import('@/routes/tingshuitz/nanjing.ts')
       },
