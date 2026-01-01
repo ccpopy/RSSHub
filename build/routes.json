@@ -16810,7 +16810,8 @@
       "/announcement/:type?/:lang?": {
         "path": "/announcement/:type?/:lang?",
         "categories": [
-          "finance"
+          "finance",
+          "popular"
         ],
         "view": 0,
         "example": "/binance/announcement/new-cryptocurrency-listing",
