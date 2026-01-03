@@ -94439,7 +94439,8 @@
         "radar": [
           {
             "source": [
-              "patreon.com/:creator"
+              "patreon.com/:creator",
+              "www.patreon.com/cw/:creator"
             ]
           }
         ],
