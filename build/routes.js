@@ -10116,6 +10116,27 @@ export default {
         "location": "news.ts",
         "module": () => import('@/routes/anthropic/news.ts')
       },
+      "/red": {
+        "path": "/red",
+        "categories": [
+          "programming"
+        ],
+        "example": "/anthropic/red",
+        "radar": [
+          {
+            "source": [
+              "red.anthropic.com"
+            ]
+          }
+        ],
+        "name": "Frontier Red Team",
+        "maintainers": [
+          "shoeper"
+        ],
+        "url": "red.anthropic.com",
+        "location": "red.ts",
+        "module": () => import('@/routes/anthropic/red.ts')
+      },
       "/research": {
         "path": "/research",
         "categories": [
