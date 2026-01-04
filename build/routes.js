@@ -9476,6 +9476,44 @@ export default {
     "url": "altotrain.ca",
     "lang": "en"
   },
+  "alwayscontrol": {
+    "routes": {
+      "/news": {
+        "path": "/news",
+        "categories": [
+          "other"
+        ],
+        "example": "/alwayscontrol/news",
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "name": "最新动态",
+        "maintainers": [
+          "moss-xxh"
+        ],
+        "url": "alwayscontrol.com.cn",
+        "radar": [
+          {
+            "source": [
+              "www.alwayscontrol.com.cn/zh-CN/news/list"
+            ],
+            "target": "/news"
+          }
+        ],
+        "description": "Always Control（旭衡电子）智能能源管理系统解决方案专家的最新动态",
+        "location": "news.ts",
+        "module": () => import('@/routes/alwayscontrol/news.ts')
+      }
+    },
+    "name": "Always Control",
+    "url": "alwayscontrol.com.cn",
+    "lang": "zh-CN"
+  },
   "amazfitwatchfaces": {
     "routes": {
       "/:device/:sort/:searchParams?": {
