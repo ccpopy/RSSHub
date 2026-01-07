@@ -76618,6 +76618,60 @@
     ],
     "lang": "en"
   },
+  "maven": {
+    "routes": {
+      "/central/:group/:artifact": {
+        "path": "/central/:group/:artifact",
+        "name": "Maven Central Feed",
+        "maintainers": [
+          "chrisis58"
+        ],
+        "description": "Get the latest versions of a Maven artifact from Maven Central Repository.",
+        "url": "central.sonatype.com/",
+        "categories": [
+          "programming"
+        ],
+        "parameters": {
+          "group": {
+            "description": "The group ID of the Maven artifact (e.g., org.springframework)"
+          },
+          "artifact": {
+            "description": "The artifact ID of the Maven artifact (e.g., spring-core)"
+          }
+        },
+        "example": "/maven/central/org.springframework/spring-core",
+        "radar": [
+          {
+            "source": [
+              "central.sonatype.com/artifact/:group/:artifact/:suffix",
+              "central.sonatype.com/artifact/:group/:artifact"
+            ],
+            "target": "/maven/central/:group/:artifact"
+          }
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportRadar": true,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false,
+          "nsfw": false
+        },
+        "location": "central.ts",
+        "module": "() => import('@/routes/maven/central.ts')"
+      }
+    },
+    "name": "Maven",
+    "apiRoutes": {},
+    "url": "repo1.maven.org/maven2/",
+    "categories": [
+      "programming"
+    ],
+    "description": "Apache Maven is a build tool for Java projects. Using a project object model (POM), Maven manages a project's compilation, testing, and documentation.",
+    "lang": "en"
+  },
   "mckinsey": {
     "routes": {
       "/cn/:category?": {
