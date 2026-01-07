@@ -3873,7 +3873,7 @@
         "radar": [
           {
             "source": [
-              "50forum.org.cn/home/article/index/category/zhuanjia.html",
+              "www.50forum.org.cn/portal/list/index.html?id=6",
               "50forum.org.cn/"
             ],
             "target": ""
@@ -3883,7 +3883,7 @@
         "maintainers": [
           "sddiky"
         ],
-        "url": "50forum.org.cn/home/article/index/category/zhuanjia.html",
+        "url": "https://www.50forum.org.cn/portal/list/index.html?id=6",
         "location": "zhuanjia.ts",
         "module": "() => import('@/routes/50forum/zhuanjia.ts')"
       }
@@ -89390,6 +89390,56 @@
     "url": "nyaa.si",
     "description": "\n::: tip\nThe 'Nyaa' includes several routes to access different parts of the site:\n1. `/nyaa/search/:query?` - Use this route to search for content with a specific query. For example, `/nyaa/search/bocchi` to search for bocchi related content.\n2. `/nyaa/user/:username?` - Access a user's profile by their username, e.g., `/nyaa/user/ANiTorrent`.\n3. `/nyaa/user/:username/search/:query?` - Search within a specific user's submissions using a query, e.g., `/nyaa/user/ANiTorrent/search/bocchi`.\n4. `/nyaa/sukebei/search/:query?` - This route is for searching adult content with a specific query, e.g., `/nyaa/sukebei/search/hentai`.\n5. `/nyaa/sukebei/user/:username?` - Access an adult content user's profile, e.g., `/nyaa/sukebei/user/milannews`.\n6. `/nyaa/sukebei/user/:username/search/:query?` - Search within a specific user's adult content submissions, e.g., `/nyaa/sukebei/user/milannews/search/hentai`.\n:::",
     "lang": "en"
+  },
+  "nyc": {
+    "routes": {
+      "/mayors-office-news/:types?/:categories?": {
+        "path": "/mayors-office-news/:types?/:categories?",
+        "name": "Mayor's Office News",
+        "maintainers": [
+          "hkamran80"
+        ],
+        "categories": [
+          "government"
+        ],
+        "example": "/nyc/mayors-office-news/executive-orders/civic-services",
+        "parameters": {
+          "types": {
+            "description": "a comma-separated list of news types. Options: see table.",
+            "default": "all"
+          },
+          "categories": {
+            "description": "a comma-separated list of categories. Options: see table.",
+            "default": "all"
+          }
+        },
+        "description": "Types\n\n| Type                | Slug                |\n| ------------------- | ------------------- |\n| Press releases      | press-releases      |\n| Executive orders    | executive-orders    |\n| Public schedule     | public-schedule     |\n| Audio               | audio               |\n| Statements          | statements          |\n| Designation letters | designation-letters |\n| Images              | images              |\n| Video               | video               |\n| All                 | all                 |\n\nCategories\n\n| Category                | Slug                |\n| ----------------------- | ------------------- |\n| Business                | business            |\n| Culture and recreation  | culture-recreation  |\n| Environment             | environment         |\n| Housing and development | housing-development |\n| Social services         | social-services     |\n| Civic services          | civic-services      |\n| Education               | education           |\n| Health                  | health              |\n| Public safety           | public-safety       |\n| Transportation          | transportation      |\n| All                     | all                 |",
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "nyc.gov",
+              "nyc.gov/mayors-office",
+              "nyc.gov/mayors-office/news/",
+              "nyc.gov/mayors-office/news/*"
+            ]
+          }
+        ],
+        "location": "mayors-office-news.ts",
+        "module": "() => import('@/routes/nyc/mayors-office-news.ts')"
+      }
+    },
+    "name": "New York City Government",
+    "apiRoutes": {},
+    "url": "nyc.gov",
+    "lang": "en-us"
   },
   "nycu": {
     "routes": {
