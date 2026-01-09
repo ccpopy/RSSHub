@@ -1322,7 +1322,9 @@ export default {
           }
         ],
         "name": "搜索",
-        "maintainers": [],
+        "maintainers": [
+          "nczitzk"
+        ],
         "url": "jmcomic.group/",
         "description": "::: tip\n  关键字必须超过两个字，这是来自网站的限制。\n:::",
         "location": "search.ts",
