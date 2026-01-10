@@ -60933,31 +60933,6 @@
   },
   "huxiu": {
     "routes": {
-      "/briefcolumn/:id": {
-        "path": "/briefcolumn/:id",
-        "categories": [
-          "new-media"
-        ],
-        "example": "/huxiu/briefcolumn/1",
-        "parameters": {
-          "id": "简报 id，可在对应简报页 URL 中找到"
-        },
-        "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": true,
-          "supportPodcast": true,
-          "supportScihub": false
-        },
-        "name": "简报",
-        "maintainers": [
-          "Fatpandac",
-          "nczitzk"
-        ],
-        "location": "brief-column.ts",
-        "module": "() => import('@/routes/huxiu/brief-column.ts')"
-      },
       "/article": {
         "path": [
           "/article",
@@ -60971,8 +60946,8 @@
         "features": {
           "requireConfig": false,
           "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": true,
+          "antiCrawler": true,
+          "supportBT": false,
           "supportPodcast": true,
           "supportScihub": false
         },
@@ -60986,9 +60961,10 @@
         "name": "资讯",
         "maintainers": [
           "HenryQW",
-          "nczitzk"
+          "nczitzk",
+          "TimoYoung"
         ],
-        "description": "| 视频 | 车与出行 | 年轻一代 | 十亿消费者 | 前沿科技 |\n| ---- | -------- | -------- | ---------- | -------- |\n| 10   | 21       | 106      | 103        | 105      |\n\n| 财经 | 娱乐淘金 | 医疗健康 | 文化教育 | 出海 |\n| ---- | -------- | -------- | -------- | ---- |\n| 115  | 22       | 111      | 113      | 114  |\n\n| 金融地产 | 企业服务 | 创业维艰 | 社交通讯 | 全球热点 | 生活腔调 |\n| -------- | -------- | -------- | -------- | -------- | -------- |\n| 102      | 110      | 2        | 112      | 107      | 4        |",
+        "description": "| 视频 | 前沿科技 | 车与出行 | 商业消费 | 社会文化 |\n| ---- | -------- | -------- | ---------- | -------- |\n| 10   | 105    | 21    | 103        | 106     |\n\n| 金融财经 | 出海 | 国际热点 | 游戏娱乐 | 健康 |\n| -------- | ---- | -------- | -------- | ---- |\n| 115      | 114  | 107      | 22       | 118  |\n\n| 书影音 | 医疗 | 3C数码 | 观点 | 其他 |\n| ------ | ---- | ------ | ---- | ---- |\n| 119    | 120  | 121    | 122  | 123  |",
         "url": "huxiu.com/article",
         "location": "channel.ts",
         "module": "() => import('@/routes/huxiu/channel.ts')"
@@ -61006,8 +60982,8 @@
         "features": {
           "requireConfig": false,
           "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": true,
+          "antiCrawler": true,
+          "supportBT": false,
           "supportPodcast": true,
           "supportScihub": false
         },
@@ -61021,9 +60997,10 @@
         "name": "资讯",
         "maintainers": [
           "HenryQW",
-          "nczitzk"
+          "nczitzk",
+          "TimoYoung"
         ],
-        "description": "| 视频 | 车与出行 | 年轻一代 | 十亿消费者 | 前沿科技 |\n| ---- | -------- | -------- | ---------- | -------- |\n| 10   | 21       | 106      | 103        | 105      |\n\n| 财经 | 娱乐淘金 | 医疗健康 | 文化教育 | 出海 |\n| ---- | -------- | -------- | -------- | ---- |\n| 115  | 22       | 111      | 113      | 114  |\n\n| 金融地产 | 企业服务 | 创业维艰 | 社交通讯 | 全球热点 | 生活腔调 |\n| -------- | -------- | -------- | -------- | -------- | -------- |\n| 102      | 110      | 2        | 112      | 107      | 4        |",
+        "description": "| 视频 | 前沿科技 | 车与出行 | 商业消费 | 社会文化 |\n| ---- | -------- | -------- | ---------- | -------- |\n| 10   | 105    | 21    | 103        | 106     |\n\n| 金融财经 | 出海 | 国际热点 | 游戏娱乐 | 健康 |\n| -------- | ---- | -------- | -------- | ---- |\n| 115      | 114  | 107      | 22       | 118  |\n\n| 书影音 | 医疗 | 3C数码 | 观点 | 其他 |\n| ------ | ---- | ------ | ---- | ---- |\n| 119    | 120  | 121    | 122  | 123  |",
         "url": "huxiu.com/article",
         "location": "channel.ts",
         "module": "() => import('@/routes/huxiu/channel.ts')"
@@ -61034,13 +61011,23 @@
         "categories": [
           "new-media"
         ],
-        "example": "/huxiu/club/2029",
+        "example": "/huxiu/club/1161",
         "parameters": {
-          "id": "俱乐部 id，可在对应俱乐部页 URL 中找到"
+          "id": "源流 id，可在对应源流页 URL 中找到"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": true,
+          "supportBT": false,
+          "supportPodcast": true,
+          "supportScihub": false
         },
         "maintainers": [
-          "nczitzk"
+          "nczitzk",
+          "TimoYoung"
         ],
+        "description": "更多源流请参见 [源流](https://www.huxiu.com/club)",
         "location": "club.ts",
         "module": "() => import('@/routes/huxiu/club.ts')"
       },
@@ -61056,8 +61043,8 @@
         "features": {
           "requireConfig": false,
           "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": true,
+          "antiCrawler": true,
+          "supportBT": false,
           "supportPodcast": true,
           "supportScihub": false
         },
@@ -61083,6 +61070,14 @@
         "parameters": {
           "id": "用户 id，可在对应用户页 URL 中找到"
         },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": true,
+          "supportBT": false,
+          "supportPodcast": true,
+          "supportScihub": false
+        },
         "maintainers": [
           "nczitzk"
         ],
@@ -61103,6 +61098,14 @@
         "parameters": {
           "id": "用户 id，可在对应用户页 URL 中找到"
         },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": true,
+          "supportBT": false,
+          "supportPodcast": true,
+          "supportScihub": false
+        },
         "maintainers": [
           "nczitzk"
         ],
@@ -61120,8 +61123,8 @@
         "features": {
           "requireConfig": false,
           "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": true,
+          "antiCrawler": true,
+          "supportBT": false,
           "supportPodcast": true,
           "supportScihub": false
         },
@@ -61152,8 +61155,8 @@
         "features": {
           "requireConfig": false,
           "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": true,
+          "antiCrawler": true,
+          "supportBT": false,
           "supportPodcast": true,
           "supportScihub": false
         },
@@ -61186,8 +61189,8 @@
         "features": {
           "requireConfig": false,
           "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": true,
+          "antiCrawler": true,
+          "supportBT": false,
           "supportPodcast": true,
           "supportScihub": false
         },
@@ -61195,7 +61198,8 @@
         "maintainers": [
           "xyqfer",
           "HenryQW",
-          "nczitzk"
+          "nczitzk",
+          "TimoYoung"
         ],
         "description": "更多标签请参见 [标签](https://www.huxiu.com/tags)",
         "location": "tag.ts",
