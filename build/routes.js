@@ -62971,52 +62971,6 @@ export default {
     "url": "infoq.cn",
     "lang": "zh-CN"
   },
-  "informedainews": {
-    "routes": {
-      "/zh-Hans/docs/:type": {
-        "path": "/zh-Hans/docs/:type",
-        "categories": [
-          "new-media"
-        ],
-        "example": "/informedainews/zh-Hans/docs/world-news-daily",
-        "parameters": {
-          "type": "world-news-daily|tech-enthusiast-weekly|ai-enthusiast-daily"
-        },
-        "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
-        "radar": [
-          {
-            "source": [
-              "informedainews.com",
-              "informedainews.com/zh-Hans/docs/:type",
-              "informedainews.com/docs/:type"
-            ],
-            "target": "/zh-Hans/docs/:type"
-          }
-        ],
-        "name": "知闻AI",
-        "maintainers": [
-          "guicaiyue"
-        ],
-        "location": "docs.ts",
-        "module": () => import('@/routes/informedainews/docs.ts')
-      }
-    },
-    "name": "Informed AI News",
-    "apiRoutes": {},
-    "url": "informedainews.com",
-    "description": "\n::: tip\ninformed AI RSS feeds:\n\n-   World News Daily: 'https://rsshub.app/informedainews/zh-Hans/docs/world-news-daily'\n-   Tech Enthusiast Weekly: 'https://rsshub.app/informedainews/zh-Hans/docs/tech-enthusiast-weekly'\n-   AI Enthusiast Weekly: 'https://rsshub.app/informedainews/zh-Hans/docs/ai-enthusiast-daily'\n:::",
-    "zh": {
-      "name": "知闻AI"
-    },
-    "lang": "en"
-  },
   "informs": {
     "routes": {
       "/:category?": {
