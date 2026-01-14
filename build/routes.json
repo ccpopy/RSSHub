@@ -72399,6 +72399,50 @@
     "url": "lala.im",
     "lang": "zh-CN"
   },
+  "lancedb": {
+    "routes": {
+      "/blog/:category?": {
+        "path": "/blog/:category?",
+        "name": "Blog",
+        "url": "lancedb.com/blog",
+        "maintainers": [
+          "HUSTERGS"
+        ],
+        "example": "/lancedb/blog",
+        "parameters": {
+          "category": "filter blog post by category, return all posts if not specified"
+        },
+        "categories": [
+          "programming"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "lancedb.com/blog",
+              "lancedb.com/blog/category/:category"
+            ],
+            "target": "/blog/:category"
+          }
+        ],
+        "view": 0,
+        "location": "blog.ts",
+        "module": "() => import('@/routes/lancedb/blog.ts')"
+      }
+    },
+    "name": "LanceDB",
+    "apiRoutes": {},
+    "url": "lancedb.com",
+    "description": "",
+    "lang": "en"
+  },
   "landiannews": {
     "routes": {
       "/category/:slug": {
