@@ -88327,6 +88327,72 @@ export default {
         "location": "experience.ts",
         "module": () => import('@/routes/nowcoder/experience.ts')
       },
+      "/hots/:type?": {
+        "path": "/hots/:type?",
+        "categories": [
+          "bbs"
+        ],
+        "example": "/nowcoder/hots/1?limit=20",
+        "parameters": {
+          "type": "热榜类型，`1` 指热议话题，`2` 指全站热贴，默认为 `1`"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "mnowpick.nowcoder.com/m/discuss/hot"
+            ]
+          }
+        ],
+        "name": "牛客热榜",
+        "description": "牛客热榜，包括热议话题和全站热贴",
+        "maintainers": [
+          "xia0ne"
+        ],
+        "url": "nowcoder.com/",
+        "location": "hots.ts",
+        "module": () => import('@/routes/nowcoder/hots.ts')
+      },
+      "/interview/:jobId": {
+        "path": "/interview/:jobId",
+        "categories": [
+          "bbs"
+        ],
+        "example": "/nowcoder/interview/11200",
+        "parameters": {
+          "jobId": "岗位 ID，如 11200（全部）、11002（Java）"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "www.nowcoder.com/interview/"
+            ]
+          }
+        ],
+        "name": "牛客面试经验",
+        "description": "牛客面试经验",
+        "maintainers": [
+          "xia0ne"
+        ],
+        "url": "nowcoder.com/",
+        "location": "interview.ts",
+        "module": () => import('@/routes/nowcoder/interview.ts')
+      },
       "/jobcenter/:recruitType?/:city?/:type?/:order?/:latest?": {
         "path": "/jobcenter/:recruitType?/:city?/:type?/:order?/:latest?",
         "categories": [
