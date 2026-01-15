@@ -34997,6 +34997,45 @@
     "url": "diershoubing.com",
     "lang": "zh-CN"
   },
+  "digg": {
+    "routes": {
+      "/community/:community": {
+        "path": "/community/:community",
+        "categories": [
+          "social-media"
+        ],
+        "example": "/digg/community/askdigg",
+        "parameters": {
+          "community": "Community slug, can be found in the URL"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "digg.com/:community"
+            ]
+          }
+        ],
+        "name": "Community Posts",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "url": "digg.com/",
+        "location": "community.tsx",
+        "module": "() => import('@/routes/digg/community.tsx')"
+      }
+    },
+    "name": "Digg",
+    "apiRoutes": {},
+    "url": "digg.com"
+  },
   "digitalcameraworld": {
     "routes": {
       "/news": {
