@@ -16289,6 +16289,186 @@ export default {
         "location": "manga-update.ts",
         "module": () => import('@/routes/bilibili/manga-update.ts')
       },
+      "/message/at/:uid": {
+        "path": "/message/at/:uid",
+        "categories": [
+          "social-media"
+        ],
+        "example": "/bilibili/message/at/2267573",
+        "parameters": {
+          "uid": "用户 id"
+        },
+        "features": {
+          "requireConfig": [
+            {
+              "name": "BILIBILI_COOKIE_*",
+              "description": "BILIBILI_COOKIE_{uid}: 用于用户关注动态系列路由，对应 uid 的 b 站用户登录后的 Cookie 值，`{uid}` 替换为 uid，如 `BILIBILI_COOKIE_2267573`，获取方式：\n    1.  打开 [https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=0&type=8](https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=0&type=8)\n    2.  打开控制台，切换到 Network 面板，刷新\n    3.  点击 dynamic_new 请求，找到 Cookie\n    4.  视频和专栏，UP 主粉丝及关注只要求 `SESSDATA` 字段，动态需复制整段 Cookie"
+            }
+          ],
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "name": "@我的",
+        "maintainers": [
+          "pilgrimlyieu"
+        ],
+        "description": ":::warning\n  用户消息需要 b 站登录后的 Cookie 值，所以只能自建，详情见部署页面的配置模块。\n:::",
+        "location": "message-at.ts",
+        "module": () => import('@/routes/bilibili/message-at.ts')
+      },
+      "/message/like/:uid": {
+        "path": "/message/like/:uid",
+        "categories": [
+          "social-media"
+        ],
+        "example": "/bilibili/message/like/2267573",
+        "parameters": {
+          "uid": "用户 id"
+        },
+        "features": {
+          "requireConfig": [
+            {
+              "name": "BILIBILI_COOKIE_*",
+              "description": "BILIBILI_COOKIE_{uid}: 用于用户关注动态系列路由，对应 uid 的 b 站用户登录后的 Cookie 值，`{uid}` 替换为 uid，如 `BILIBILI_COOKIE_2267573`，获取方式：\n    1.  打开 [https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=0&type=8](https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=0&type=8)\n    2.  打开控制台，切换到 Network 面板，刷新\n    3.  点击 dynamic_new 请求，找到 Cookie\n    4.  视频和专栏，UP 主粉丝及关注只要求 `SESSDATA` 字段，动态需复制整段 Cookie"
+            }
+          ],
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "name": "收到的赞",
+        "maintainers": [
+          "pilgrimlyieu"
+        ],
+        "description": ":::warning\n  用户消息需要 b 站登录后的 Cookie 值，所以只能自建，详情见部署页面的配置模块。\n:::",
+        "location": "message-like.ts",
+        "module": () => import('@/routes/bilibili/message-like.ts')
+      },
+      "/message/reply/:uid": {
+        "path": "/message/reply/:uid",
+        "categories": [
+          "social-media"
+        ],
+        "example": "/bilibili/message/reply/2267573",
+        "parameters": {
+          "uid": "用户 id"
+        },
+        "features": {
+          "requireConfig": [
+            {
+              "name": "BILIBILI_COOKIE_*",
+              "description": "BILIBILI_COOKIE_{uid}: 用于用户关注动态系列路由，对应 uid 的 b 站用户登录后的 Cookie 值，`{uid}` 替换为 uid，如 `BILIBILI_COOKIE_2267573`，获取方式：\n    1.  打开 [https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=0&type=8](https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=0&type=8)\n    2.  打开控制台，切换到 Network 面板，刷新\n    3.  点击 dynamic_new 请求，找到 Cookie\n    4.  视频和专栏，UP 主粉丝及关注只要求 `SESSDATA` 字段，动态需复制整段 Cookie"
+            }
+          ],
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "name": "回复我的",
+        "maintainers": [
+          "pilgrimlyieu"
+        ],
+        "description": ":::warning\n  用户消息需要 b 站登录后的 Cookie 值，所以只能自建，详情见部署页面的配置模块。\n:::",
+        "location": "message-reply.ts",
+        "module": () => import('@/routes/bilibili/message-reply.ts')
+      },
+      "/message/sessions/:uid": {
+        "path": "/message/sessions/:uid",
+        "categories": [
+          "social-media"
+        ],
+        "example": "/bilibili/message/sessions/2267573",
+        "parameters": {
+          "uid": "用户 id"
+        },
+        "features": {
+          "requireConfig": [
+            {
+              "name": "BILIBILI_COOKIE_*",
+              "description": "BILIBILI_COOKIE_{uid}: 用于用户关注动态系列路由，对应 uid 的 b 站用户登录后的 Cookie 值，`{uid}` 替换为 uid，如 `BILIBILI_COOKIE_2267573`，获取方式：\n    1.  打开 [https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=0&type=8](https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=0&type=8)\n    2.  打开控制台，切换到 Network 面板，刷新\n    3.  点击 dynamic_new 请求，找到 Cookie\n    4.  视频和专栏，UP 主粉丝及关注只要求 `SESSDATA` 字段，动态需复制整段 Cookie"
+            }
+          ],
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "name": "我的消息",
+        "maintainers": [
+          "pilgrimlyieu"
+        ],
+        "description": ":::warning\n  用户消息需要 b 站登录后的 Cookie 值，所以只能自建，详情见部署页面的配置模块。\n:::",
+        "location": "message-sessions.ts",
+        "module": () => import('@/routes/bilibili/message-sessions.ts')
+      },
+      "/message/system/:uid": {
+        "path": "/message/system/:uid",
+        "categories": [
+          "social-media"
+        ],
+        "example": "/bilibili/message/system/2267573",
+        "parameters": {
+          "uid": "用户 id"
+        },
+        "features": {
+          "requireConfig": [
+            {
+              "name": "BILIBILI_COOKIE_*",
+              "description": "BILIBILI_COOKIE_{uid}: 用于用户关注动态系列路由，对应 uid 的 b 站用户登录后的 Cookie 值，`{uid}` 替换为 uid，如 `BILIBILI_COOKIE_2267573`，获取方式：\n    1.  打开 [https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=0&type=8](https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=0&type=8)\n    2.  打开控制台，切换到 Network 面板，刷新\n    3.  点击 dynamic_new 请求，找到 Cookie\n    4.  视频和专栏，UP 主粉丝及关注只要求 `SESSDATA` 字段，动态需复制整段 Cookie"
+            }
+          ],
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "name": "系统通知",
+        "maintainers": [
+          "pilgrimlyieu"
+        ],
+        "description": ":::warning\n  用户消息需要 b 站登录后的 Cookie 值，所以只能自建，详情见部署页面的配置模块。\n:::",
+        "location": "message-system.ts",
+        "module": () => import('@/routes/bilibili/message-system.ts')
+      },
+      "/message/unread/:uid": {
+        "path": "/message/unread/:uid",
+        "categories": [
+          "social-media"
+        ],
+        "example": "/bilibili/message/unread/2267573",
+        "parameters": {
+          "uid": "用户 id"
+        },
+        "features": {
+          "requireConfig": [
+            {
+              "name": "BILIBILI_COOKIE_*",
+              "description": "BILIBILI_COOKIE_{uid}: 用于用户关注动态系列路由，对应 uid 的 b 站用户登录后的 Cookie 值，`{uid}` 替换为 uid，如 `BILIBILI_COOKIE_2267573`，获取方式：\n    1.  打开 [https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=0&type=8](https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=0&type=8)\n    2.  打开控制台，切换到 Network 面板，刷新\n    3.  点击 dynamic_new 请求，找到 Cookie\n    4.  视频和专栏，UP 主粉丝及关注只要求 `SESSDATA` 字段，动态需复制整段 Cookie"
+            }
+          ],
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "name": "未读消息",
+        "maintainers": [
+          "pilgrimlyieu"
+        ],
+        "description": ":::warning\n  用户消息需要 b 站登录后的 Cookie 值，所以只能自建，详情见部署页面的配置模块。\n\n  此路由返回所有未读消息类型的汇总状态。\n:::",
+        "location": "message-unread.ts",
+        "module": () => import('@/routes/bilibili/message-unread.ts')
+      },
       "/video/page/:bvid/:embed?": {
         "path": "/video/page/:bvid/:embed?",
         "categories": [
