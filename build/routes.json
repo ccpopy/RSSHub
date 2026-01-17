@@ -7175,6 +7175,47 @@
     "url": "news.ahjzu.edu.cn",
     "lang": "zh-CN"
   },
+  "ai-bot": {
+    "routes": {
+      "/daily-ai-news": {
+        "path": "/daily-ai-news",
+        "categories": [
+          "new-media"
+        ],
+        "example": "/ai-bot/daily-ai-news",
+        "parameters": {},
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "ai-bot.cn/daily-ai-news",
+              "ai-bot.cn/daily-ai-news/"
+            ],
+            "target": "/daily-ai-news"
+          }
+        ],
+        "name": "每日AI资讯",
+        "maintainers": [
+          "redwood9"
+        ],
+        "url": "ai-bot.cn/daily-ai-news",
+        "description": "获取 AI 工具集网站的每日 AI 资讯汇总。",
+        "location": "daily-ai-news.ts",
+        "module": "() => import('@/routes/ai-bot/daily-ai-news.ts')"
+      }
+    },
+    "name": "AI工具集",
+    "apiRoutes": {},
+    "url": "ai-bot.cn",
+    "lang": "zh-CN"
+  },
   "aiaa": {
     "routes": {
       "/journal/:journalID": {
