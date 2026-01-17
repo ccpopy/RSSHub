@@ -81908,6 +81908,37 @@ export default {
     "url": "mrdx.cn",
     "lang": "zh-CN"
   },
+  "mrinalxdev": {
+    "routes": {
+      "/blog": {
+        "path": "/blog",
+        "categories": [
+          "blog"
+        ],
+        "example": "/mrinalxdev/blog",
+        "url": "mrinalxdev.github.io/mrinalxblogs/blogs/blog.html",
+        "name": "Blog",
+        "maintainers": [
+          "jack-110"
+        ],
+        "radar": [
+          {
+            "source": [
+              "mrinalxdev.github.io/mrinalxblogs/blogs/blog.html",
+              "mrinalxdev.github.io/mrinalxblogs/"
+            ],
+            "target": "/blog"
+          }
+        ],
+        "location": "blog.ts",
+        "module": () => import('@/routes/mrinalxdev/blog.ts')
+      }
+    },
+    "name": "Mrinal Pramanick",
+    "apiRoutes": {},
+    "url": "mrinalxdev.github.io",
+    "lang": "en"
+  },
   "mrm": {
     "routes": {
       "/:category?": {
