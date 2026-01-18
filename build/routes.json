@@ -35411,6 +35411,39 @@
         "location": "channel.ts",
         "module": "() => import('@/routes/discord/channel.ts')"
       },
+      "/quests": {
+        "path": "/quests",
+        "categories": [
+          "social-media"
+        ],
+        "example": "/discord/quests",
+        "features": {
+          "requireConfig": [
+            {
+              "name": "DISCORD_AUTHORIZATION",
+              "description": "Discord authorization header"
+            }
+          ],
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "discord.com/quest-home"
+            ]
+          }
+        ],
+        "name": "Quests",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "location": "quest.ts",
+        "module": "() => import('@/routes/discord/quest.ts')"
+      },
       "/search/:guildId/:routeParams": {
         "path": "/search/:guildId/:routeParams",
         "categories": [
