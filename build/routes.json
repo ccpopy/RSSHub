@@ -45655,6 +45655,147 @@
     "url": "news.gamme.com.tw",
     "lang": "zh-TW"
   },
+  "ganjingworld": {
+    "routes": {
+      "/channel/articles/:id": {
+        "path": "/channel/articles/:id",
+        "categories": [
+          "social-media"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "example": "/ganjingworld/channel/articles/1fcahpcut9t3gz4zIvYSJR7qd1cs0c",
+        "parameters": {
+          "id": "Channel ID, can be found in channel url"
+        },
+        "radar": [
+          {
+            "source": [
+              "ganjingworld.com"
+            ],
+            "target": "/channel/articles/:id"
+          }
+        ],
+        "url": "www.ganjingworld.com",
+        "name": "Articles in a channel",
+        "maintainers": [
+          "yixiangli2001"
+        ],
+        "location": "channel/articles.ts",
+        "module": "() => import('@/routes/ganjingworld/channel/articles.ts')"
+      },
+      "/channel/posts/:id": {
+        "path": "/channel/posts/:id",
+        "categories": [
+          "social-media"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "example": "/ganjingworld/channel/posts/1fcahpcut9t3gz4zIvYSJR7qd1cs0c",
+        "parameters": {
+          "id": "Channel ID, can be found in channel url"
+        },
+        "radar": [
+          {
+            "source": [
+              "ganjingworld.com"
+            ],
+            "target": "/channel/posts/:id"
+          }
+        ],
+        "url": "www.ganjingworld.com",
+        "name": "posts in a channel",
+        "maintainers": [
+          "yixiangli2001"
+        ],
+        "location": "channel/posts.ts",
+        "module": "() => import('@/routes/ganjingworld/channel/posts.ts')"
+      },
+      "/channel/shorts/:id": {
+        "path": "/channel/shorts/:id",
+        "categories": [
+          "social-media"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "example": "/ganjingworld/channel/shorts/1fq5chh3ajo67UNu14uAvfzOp1a80c",
+        "parameters": {
+          "id": "Channel ID, can be found in channel url"
+        },
+        "radar": [
+          {
+            "source": [
+              "ganjingworld.com"
+            ],
+            "target": "/channel/shorts/:id"
+          }
+        ],
+        "url": "www.ganjingworld.com",
+        "name": "Shorts in a channel",
+        "maintainers": [
+          "yixiangli2001"
+        ],
+        "location": "channel/shorts.ts",
+        "module": "() => import('@/routes/ganjingworld/channel/shorts.ts')"
+      },
+      "/channel/videos/:id": {
+        "path": "/channel/videos/:id",
+        "categories": [
+          "social-media"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "example": "/ganjingworld/channel/videos/1eiqjdnq7go1OPYtIbLDVMpM61ok0c",
+        "parameters": {
+          "id": "Channel ID, can be found in channel url"
+        },
+        "radar": [
+          {
+            "source": [
+              "ganjingworld.com"
+            ],
+            "target": "/channel/videos/:id"
+          }
+        ],
+        "url": "www.ganjingworld.com",
+        "name": "Videos in a channel",
+        "maintainers": [
+          "yixiangli2001"
+        ],
+        "location": "channel/videos.ts",
+        "module": "() => import('@/routes/ganjingworld/channel/videos.ts')"
+      }
+    },
+    "name": "Ganjing World",
+    "apiRoutes": {},
+    "url": "www.ganjingworld.com/",
+    "description": "\"Gan Jing\" means Clean. Through the utilization of technology, Gan Jing World is dedicated to revitalizing traditional connections—fostering a culture of care, kindness, mutual respect, and trust among individuals, within families, and throughout society.",
+    "lang": "en"
+  },
   "gaoyu": {
     "routes": {
       "/blog": {
@@ -95332,6 +95473,48 @@
     "name": "PeoPo 公民新聞",
     "url": "peopo.org",
     "lang": "zh-TW"
+  },
+  "perplexity": {
+    "routes": {
+      "/changelog": {
+        "path": "/changelog",
+        "name": "Changelog",
+        "url": "www.perplexity.ai",
+        "maintainers": [
+          "xbot"
+        ],
+        "example": "/perplexity/changelog",
+        "description": "Subscribe to Perplexity changelog for latest updates and releases.",
+        "categories": [
+          "program-update"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": true,
+          "antiCrawler": false,
+          "supportRadar": true,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "www.perplexity.ai/changelog"
+            ],
+            "target": "/changelog"
+          }
+        ],
+        "view": 0,
+        "location": "changelog.ts",
+        "module": "() => import('@/routes/perplexity/changelog.ts')"
+      }
+    },
+    "name": "Perplexity",
+    "apiRoutes": {},
+    "url": "www.perplexity.ai",
+    "description": "Perplexity - AI-powered search and discovery engine",
+    "lang": "en"
   },
   "phoronix": {
     "routes": {
