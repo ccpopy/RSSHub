@@ -20055,6 +20055,34 @@ export default {
     "url": "bupt.edu.cn",
     "lang": "zh-CN"
   },
+  "bvisness": {
+    "routes": {
+      "/blog": {
+        "name": "Blog",
+        "categories": [
+          "blog"
+        ],
+        "maintainers": [
+          "raxod502"
+        ],
+        "path": "/blog",
+        "example": "/bvisness/blog",
+        "radar": [
+          {
+            "source": [
+              "bvisness.me"
+            ],
+            "target": "/blog"
+          }
+        ],
+        "location": "blog.ts",
+        "module": () => import('@/routes/bvisness/blog.ts')
+      }
+    },
+    "name": "Ben Visness",
+    "apiRoutes": {},
+    "url": "bvisness.me"
+  },
   "bwsg": {
     "routes": {
       "*": {
