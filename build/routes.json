@@ -28450,6 +28450,82 @@
     "url": "cockroachlabs.com",
     "lang": "en"
   },
+  "codefather": {
+    "routes": {
+      "/posts/:category?/:sort?": {
+        "path": "/posts/:category?/:sort?",
+        "categories": [
+          "programming"
+        ],
+        "example": "/codefather/posts",
+        "parameters": {
+          "category": "分类，可选 `交流`、`学习`、`项目`、`资源`、`经验`，默认为全部",
+          "sort": "排序方式，可选 `new`（最新）、`hot`（热门）、`recommend`（推荐），默认为 `new`"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "www.codefather.cn/",
+              "www.codefather.cn"
+            ],
+            "target": "/posts"
+          }
+        ],
+        "name": "帖子",
+        "maintainers": [
+          "JackyST0"
+        ],
+        "description": "获取编程导航社区的帖子，支持按热门、最新、推荐排序，支持按分类筛选。",
+        "location": "posts.ts",
+        "module": "() => import('@/routes/codefather/posts.ts')"
+      },
+      "/questions/:sort?": {
+        "path": "/questions/:sort?",
+        "categories": [
+          "programming"
+        ],
+        "example": "/codefather/questions",
+        "parameters": {
+          "sort": "排序方式，可选 `new`（最新）、`hot`（热门），默认为 `new`"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "www.codefather.cn/qa",
+              "www.codefather.cn"
+            ],
+            "target": "/questions"
+          }
+        ],
+        "name": "问答",
+        "maintainers": [
+          "JackyST0"
+        ],
+        "description": "获取编程导航社区的问答内容，支持按最新、热门排序。",
+        "location": "questions.ts",
+        "module": "() => import('@/routes/codefather/questions.ts')"
+      }
+    },
+    "name": "编程导航",
+    "url": "www.codefather.cn",
+    "description": "编程导航是一个编程学习交流社区，由程序员鱼皮创建，提供学习路线、项目教程、求职攻略、技术交流等内容。"
+  },
   "codeforces": {
     "routes": {
       "/contests": {
