@@ -108679,6 +108679,73 @@ export default {
     "url": "skysports.com",
     "lang": "en"
   },
+  "slashdot": {
+    "routes": {
+      "/:section?": {
+        "path": "/:section?",
+        "categories": [
+          "new-media"
+        ],
+        "example": "/slashdot",
+        "parameters": {
+          "section": "Section name, can be found in the URL host, leave empty for the main page"
+        },
+        "radar": [
+          {
+            "source": [
+              "slashdot.org"
+            ]
+          },
+          {
+            "source": [
+              "devices.slashdot.org"
+            ],
+            "target": "/devices"
+          },
+          {
+            "source": [
+              "build.slashdot.org"
+            ],
+            "target": "/build"
+          },
+          {
+            "source": [
+              "entertainment.slashdot.org"
+            ],
+            "target": "/entertainment"
+          },
+          {
+            "source": [
+              "technology.slashdot.org"
+            ],
+            "target": "/technology"
+          },
+          {
+            "source": [
+              "science.slashdot.org"
+            ],
+            "target": "/science"
+          },
+          {
+            "source": [
+              "yro.slashdot.org"
+            ],
+            "target": "/yro"
+          }
+        ],
+        "name": "News",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "location": "index.ts",
+        "module": () => import('@/routes/slashdot/index.ts')
+      }
+    },
+    "name": "Slashdot",
+    "apiRoutes": {},
+    "url": "slashdot.org",
+    "lang": "en"
+  },
   "slowmist": {
     "routes": {
       "/:type?": {
@@ -122888,6 +122955,37 @@ export default {
     "name": "太原师范学院",
     "url": "tynu.edu.cn",
     "lang": "zh-CN"
+  },
+  "typeless": {
+    "routes": {
+      "/changelog": {
+        "path": "/changelog",
+        "example": "/typeless/changelog",
+        "categories": [
+          "program-update"
+        ],
+        "radar": [
+          {
+            "source": [
+              "www.typeless.com/help/release-notes/*",
+              "www.typeless.com/help/release-notes",
+              "www.typeless.com"
+            ]
+          }
+        ],
+        "name": "Changelog",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "url": "www.typeless.com/help/release-notes",
+        "location": "changelog.ts",
+        "module": () => import('@/routes/typeless/changelog.ts')
+      }
+    },
+    "name": "Typeless",
+    "apiRoutes": {},
+    "url": "typeless.com",
+    "lang": "en"
   },
   "typora": {
     "routes": {
