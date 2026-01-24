@@ -76822,6 +76822,105 @@
     ],
     "lang": "en"
   },
+  "maoyan": {
+    "routes": {
+      "/box": {
+        "path": "/box",
+        "categories": [
+          "multimedia"
+        ],
+        "example": "/maoyan/box",
+        "parameters": {},
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "piaofang.maoyan.com/dashboard"
+            ],
+            "target": "/box"
+          }
+        ],
+        "name": "实时票房榜",
+        "maintainers": [
+          "JackyST0"
+        ],
+        "location": "box.ts",
+        "module": "() => import('@/routes/maoyan/box.ts')"
+      },
+      "/coming": {
+        "path": "/coming",
+        "categories": [
+          "multimedia"
+        ],
+        "example": "/maoyan/coming",
+        "parameters": {},
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "www.maoyan.com/films?showType=2",
+              "www.maoyan.com/films"
+            ],
+            "target": "/coming"
+          }
+        ],
+        "name": "即将上映",
+        "maintainers": [
+          "JackyST0"
+        ],
+        "location": "coming.ts",
+        "module": "() => import('@/routes/maoyan/coming.ts')"
+      },
+      "/hot": {
+        "path": "/hot",
+        "categories": [
+          "multimedia"
+        ],
+        "example": "/maoyan/hot",
+        "parameters": {},
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "www.maoyan.com/films?showType=1"
+            ],
+            "target": "/hot"
+          }
+        ],
+        "name": "正在热映",
+        "maintainers": [
+          "JackyST0"
+        ],
+        "location": "hot.ts",
+        "module": "() => import('@/routes/maoyan/hot.ts')"
+      }
+    },
+    "name": "猫眼电影",
+    "apiRoutes": {},
+    "url": "maoyan.com",
+    "lang": "zh-CN"
+  },
   "mashiro": {
     "routes": {
       "/:lang": {
