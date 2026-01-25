@@ -14795,7 +14795,8 @@ export default {
         "url": "baoyu.io/",
         "name": "Blog",
         "maintainers": [
-          "liyaozhong"
+          "liyaozhong",
+          "Circloud"
         ],
         "description": "宝玉 - 博客文章",
         "location": "index.ts",
