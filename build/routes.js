@@ -91386,6 +91386,27 @@ export default {
   },
   "openai": {
     "routes": {
+      "/chatgpt-atlas/release-notes": {
+        "path": "/chatgpt-atlas/release-notes",
+        "categories": [
+          "program-update"
+        ],
+        "example": "/openai/chatgpt-atlas/release-notes",
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "name": "ChatGPT Atlas - Release Notes",
+        "maintainers": [
+          "xbot"
+        ],
+        "location": "chatgpt-atlas.ts",
+        "module": () => import('@/routes/openai/chatgpt-atlas.ts')
+      },
       "/chatgpt/release-notes": {
         "path": "/chatgpt/release-notes",
         "categories": [
