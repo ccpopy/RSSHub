@@ -131091,6 +131091,55 @@ export default {
     "url": "xinpianchang.com",
     "lang": "zh-CN"
   },
+  "xjtlu": {
+    "routes": {
+      "/news/:lang?/:category?": {
+        "path": "/news/:lang?/:category?",
+        "categories": [
+          "university"
+        ],
+        "example": "/xjtlu/news/en/technology",
+        "url": "www.xjtlu.edu.cn/en/news",
+        "parameters": {
+          "lang": "Language, `en` or `zh`, default: `en`",
+          "category": "Category, see table below, default: `all`"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "www.xjtlu.edu.cn/:lang/about/news/all-news",
+              "www.xjtlu.edu.cn/:lang/news"
+            ],
+            "target": "/news/:lang"
+          }
+        ],
+        "name": "News",
+        "maintainers": [
+          "Circloud"
+        ],
+        "description": "Categories:\n\n| Category | English Name | Chinese Name |\n| -------- | ------------ | ------------ |\n| `all` | All | 全部 |\n| `anniversary` | XJTLU 20th Anniversary | 西浦20周年 |\n| `technology` | Science and Technology | 科技 |\n| `business` | Business | 商业管理 |\n| `environment` | Built Environment | 建筑环境 |\n| `humanities` | Humanities and Social Sciences | 人文社科 |\n| `community` | Community | 校园与社区 |\n| `about` | About XJTLU | 要闻聚焦 |\n| `stories` | XJTLU Stories | 招生专区 |",
+        "location": "news.ts",
+        "module": () => import('@/routes/xjtlu/news.ts')
+      }
+    },
+    "name": "Xi'an Jiaotong-Liverpool University",
+    "url": "www.xjtlu.edu.cn",
+    "categories": [
+      "university"
+    ],
+    "lang": "en",
+    "zh": {
+      "name": "西交利物浦大学"
+    }
+  },
   "xjtu": {
     "routes": {
       "/2yuan/news/:id?": {
