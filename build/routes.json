@@ -137242,6 +137242,38 @@
         "location": "kjc.ts",
         "module": "() => import('@/routes/zzu/kjc.ts')"
       },
+      "/math/:type": {
+        "path": "/math/:type",
+        "categories": [
+          "university"
+        ],
+        "example": "/zzu/math/xyxw",
+        "parameters": {
+          "type": "分类名"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "www5.zzu.edu.cn/math/"
+            ]
+          }
+        ],
+        "name": "郑大数学与统计学院",
+        "maintainers": [
+          "amandus1990"
+        ],
+        "description": "| 学院新闻 | 通知公告 | 党工团学 | 学术报告 |\n| -------- | -------- | -------- | -------- |\n| xyxw     | tzgg     | dgtx     | xsbg     |",
+        "location": "math.ts",
+        "module": "() => import('@/routes/zzu/math.ts')"
+      },
       "/news/:type": {
         "path": "/news/:type",
         "categories": [
@@ -137369,6 +137401,38 @@
         "description": "| 新闻资讯 | 通知公告 |\n| -------- | -------- |\n| xwzx     | tzgg     |",
         "location": "student.ts",
         "module": "() => import('@/routes/zzu/student.ts')"
+      },
+      "/sxy/:type": {
+        "path": "/sxy/:type",
+        "categories": [
+          "university"
+        ],
+        "example": "/zzu/sxy/xyxw",
+        "parameters": {
+          "type": "分类名"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "www5.zzu.edu.cn/sxy/"
+            ]
+          }
+        ],
+        "name": "郑大商学院",
+        "maintainers": [
+          "amandus1990"
+        ],
+        "description": "| 学院新闻 | 通知公告 | 教学科研 | 党工团学 | 讲座报告 | 学者观点 |\n| -------- | -------- | -------- | -------- | -------- | -------- |\n| xyxw     | tzgg     | jxky     | dgtx     | jzbg     | xzgd     |",
+        "location": "sxy.ts",
+        "module": "() => import('@/routes/zzu/sxy.ts')"
       },
       "/tzhb/:type": {
         "path": "/tzhb/:type",
