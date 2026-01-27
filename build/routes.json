@@ -32173,6 +32173,114 @@
     ],
     "lang": "en"
   },
+  "dailypush": {
+    "routes": {
+      "/:sort?": {
+        "path": "/:sort?",
+        "categories": [
+          "programming"
+        ],
+        "example": "/dailypush/latest",
+        "parameters": {
+          "sort": {
+            "description": "Sort order: `` (trending, default) or `latest`",
+            "default": "",
+            "options": [
+              {
+                "value": "",
+                "label": "Trending"
+              },
+              {
+                "value": "latest",
+                "label": "Latest"
+              }
+            ]
+          }
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "dailypush.dev/",
+              "dailypush.dev/latest"
+            ],
+            "target": "/"
+          }
+        ],
+        "name": "All",
+        "maintainers": [
+          "TheGeeKing"
+        ],
+        "location": "all.ts",
+        "module": "() => import('@/routes/dailypush/all.ts')"
+      },
+      "/tag/:tag/:sort?": {
+        "path": "/tag/:tag/:sort?",
+        "categories": [
+          "programming"
+        ],
+        "example": "/dailypush/tag/backend/trending",
+        "parameters": {
+          "tag": {
+            "description": "Tag name"
+          },
+          "sort": {
+            "description": "Sort order: `trending` (default) or `latest`",
+            "default": "trending",
+            "options": [
+              {
+                "value": "trending",
+                "label": "Trending"
+              },
+              {
+                "value": "latest",
+                "label": "Latest"
+              }
+            ]
+          }
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "dailypush.dev/:tag/trending",
+              "dailypush.dev/:tag/latest",
+              "dailypush.dev/:tag"
+            ],
+            "target": "/tag/:tag/:sort?"
+          }
+        ],
+        "name": "Tag",
+        "maintainers": [
+          "TheGeeKing"
+        ],
+        "location": "tags.ts",
+        "module": "() => import('@/routes/dailypush/tags.ts')"
+      }
+    },
+    "name": "DailyPush",
+    "apiRoutes": {},
+    "url": "dailypush.dev",
+    "description": "DailyPush aggregates trending dev articles from 200+ blogs, ranked by community signals from Hacker News, Reddit, X & more.",
+    "lang": "en",
+    "categories": [
+      "programming"
+    ]
+  },
   "damai": {
     "routes": {
       "/activity/:city/:category/:subcategory/:keyword?": {
