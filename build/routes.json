@@ -91521,7 +91521,6 @@
           "program-update"
         ],
         "example": "/openai/chatgpt/release-notes",
-        "parameters": {},
         "features": {
           "requireConfig": false,
           "requirePuppeteer": false,
@@ -91531,7 +91530,9 @@
           "supportScihub": false
         },
         "name": "ChatGPT - Release Notes",
-        "maintainers": [],
+        "maintainers": [
+          "xbot"
+        ],
         "location": "chatgpt.ts",
         "module": "() => import('@/routes/openai/chatgpt.ts')"
       },
