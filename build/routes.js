@@ -89805,9 +89805,9 @@ export default {
         "categories": [
           "university"
         ],
-        "example": "/nuist/bulletin/791",
+        "example": "/nuist/bulletin/wjgg",
         "parameters": {
-          "category": "默认为 `791`"
+          "category": "分类名，默认为 `default` (全部)，支持 wjgg, kyxx 等拼音缩写"
         },
         "features": {
           "requireConfig": false,
@@ -89820,16 +89820,16 @@ export default {
         "radar": [
           {
             "source": [
-              "bulletin.nuist.edu.cn/:category/list.htm"
-            ],
-            "target": "/bulletin/:category"
+              "bulletin.nuist.edu.cn/:filename"
+            ]
           }
         ],
         "name": "南信大信息公告栏",
         "maintainers": [
-          "gylidian"
+          "gylidian",
+          "QianYu-u"
         ],
-        "description": "| 全部 | 文件公告 | 学术报告 | 招标信息 | 会议通知 | 党政事务 | 组织人事 |\n| ---- | -------- | -------- | -------- | -------- | -------- | -------- |\n| 791  | 792      | xsbgw    | 779      | 780      | 781      | 782      |\n\n| 科研信息 | 招生就业 | 教学考试 | 专题讲座 | 校园活动 | 学院动态 | 其他 |\n| -------- | -------- | -------- | -------- | -------- | -------- | ---- |\n| 783      | 784      | 785      | 786      | 788      | 789      | qt   |\n\n::: warning\n  全文内容需使用 校园网或[VPN](http://vpn.nuist.edu.cn) 获取\n:::",
+        "description": "\n| 参数 | 含义 |\n| :--- | :--- |\n| default | 全部 |\n| wjgg | 文件公告 |\n| kyxx | 科研信息 |\n| zbxx | 招标信息 |\n| jxks | 教学考试 |\n| dzsw | 党政事务 |\n| ... | (支持官网对应栏目的拼音简写) |\n\n::: warning\n  全文内容需使用 校园网或[VPN](http://vpn.nuist.edu.cn) 获取\n:::",
         "location": "bulletin.ts",
         "module": () => import('@/routes/nuist/bulletin.ts')
       },
