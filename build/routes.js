@@ -53589,13 +53589,71 @@ export default {
         "location": "ndrc/zfxxgk.ts",
         "module": () => import('@/routes/gov/ndrc/zfxxgk.ts')
       },
-      "/nea/sjzz/ghs": {
-        "path": "/nea/sjzz/ghs",
+      "/nea/sjzz/:bureau": {
+        "path": "/nea/sjzz/:bureau",
         "categories": [
           "government"
         ],
         "example": "/gov/nea/sjzz/ghs",
-        "parameters": {},
+        "parameters": {
+          "bureau": {
+            "description": "司局",
+            "options": [
+              {
+                "value": "zhs",
+                "label": "综合司"
+              },
+              {
+                "value": "fgs",
+                "label": "法改司"
+              },
+              {
+                "value": "ghs",
+                "label": "规划司"
+              },
+              {
+                "value": "kjs",
+                "label": "科技司"
+              },
+              {
+                "value": "dls",
+                "label": "电力司"
+              },
+              {
+                "value": "hds",
+                "label": "核电司"
+              },
+              {
+                "value": "mts",
+                "label": "煤炭司"
+              },
+              {
+                "value": "yqs",
+                "label": "油气司"
+              },
+              {
+                "value": "xny",
+                "label": "新能源司"
+              },
+              {
+                "value": "jgs",
+                "label": "监管司"
+              },
+              {
+                "value": "aqs",
+                "label": "安全司"
+              },
+              {
+                "value": "gjs",
+                "label": "国际司"
+              },
+              {
+                "value": "jgdw",
+                "label": "机关党委（人事司）"
+              }
+            ]
+          }
+        },
         "features": {
           "requireConfig": false,
           "requirePuppeteer": false,
@@ -53607,19 +53665,19 @@ export default {
         "radar": [
           {
             "source": [
-              "nea.gov.cn/sjzz/ghs/"
+              "nea.gov.cn/sjzz/:bureau/index.htm"
             ],
-            "target": "/nea/sjzz/ghs"
+            "target": "/nea/sjzz/:bureau"
           }
         ],
-        "name": "发展规划司",
+        "name": "司工作进展",
         "maintainers": [
           "nczitzk",
           "pseudoyu"
         ],
-        "url": "www.nea.gov.cn/sjzz/ghs/",
-        "location": "nea/ghs.ts",
-        "module": () => import('@/routes/gov/nea/ghs.ts')
+        "url": "www.nea.gov.cn/",
+        "location": "nea/bureau.ts",
+        "module": () => import('@/routes/gov/nea/bureau.ts')
       },
       "/nifdc/:path{.+}?": {
         "path": "/nifdc/:path{.+}?",
