@@ -120508,6 +120508,38 @@ export default {
   },
   "tiktok": {
     "routes": {
+      "/live/:user": {
+        "path": "/live/:user",
+        "categories": [
+          "social-media"
+        ],
+        "example": "/tiktok/live/@shinichifuku",
+        "parameters": {
+          "user": "User ID, including @"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "www.tiktok.com/:user/live"
+            ],
+            "target": "/live/:user"
+          }
+        ],
+        "name": "Live",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "location": "live.ts",
+        "module": () => import('@/routes/tiktok/live.ts')
+      },
       "/user/:user/:iframe?": {
         "path": "/user/:user/:iframe?",
         "categories": [
@@ -120529,7 +120561,7 @@ export default {
         "radar": [
           {
             "source": [
-              "tiktok.com/:user"
+              "www.tiktok.com/:user"
             ],
             "target": "/user/:user"
           }
@@ -120543,6 +120575,7 @@ export default {
       }
     },
     "name": "TikTok",
+    "apiRoutes": {},
     "url": "tiktok.com",
     "lang": "en"
   },
