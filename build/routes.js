@@ -81553,6 +81553,70 @@ export default {
         "description": "MIT HAN Lab pioneers research in efficient AI, advancing algorithms and hardware to make generative models faster, smarter, and more accessible.",
         "location": "hanlab.ts",
         "module": () => import('@/routes/mit/hanlab.ts')
+      },
+      "/scratch/user-comments/:username": {
+        "path": "/scratch/user-comments/:username",
+        "categories": [
+          "social-media"
+        ],
+        "example": "/mit/scratch/user-comments/skota11",
+        "parameters": {
+          "username": "Scratch username"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "scratch.mit.edu/users/:username/"
+            ],
+            "target": "/scratch/user-comments/:username"
+          }
+        ],
+        "name": "Scratch User Comments",
+        "maintainers": [
+          "Skota11"
+        ],
+        "location": "scratch/user-comments.ts",
+        "module": () => import('@/routes/mit/scratch/user-comments.ts')
+      },
+      "/scratch/user-projects/:username": {
+        "path": "/scratch/user-projects/:username",
+        "categories": [
+          "social-media"
+        ],
+        "example": "/mit/scratch/user-projects/abee",
+        "parameters": {
+          "username": "Scratch username"
+        },
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "scratch.mit.edu/users/:username/projects/"
+            ],
+            "target": "/scratch/user-projects/:username"
+          }
+        ],
+        "name": "Scratch User Projects",
+        "maintainers": [
+          "Skota11"
+        ],
+        "location": "scratch/user-projects.ts",
+        "module": () => import('@/routes/mit/scratch/user-projects.ts')
       }
     },
     "name": "Massachusetts Institute of Technology",
