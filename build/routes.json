@@ -92117,9 +92117,98 @@
         "categories": [
           "programming"
         ],
-        "example": "/oschina/news/project",
+        "example": "/oschina/news",
         "parameters": {
-          "category": "板块名"
+          "category": {
+            "description": "板块名",
+            "default": "0",
+            "options": [
+              {
+                "value": "0",
+                "label": "全部"
+              },
+              {
+                "value": "1",
+                "label": "开源治理"
+              },
+              {
+                "value": "2",
+                "label": "区块链 & Web3 & 元宇宙"
+              },
+              {
+                "value": "3",
+                "label": "云原生"
+              },
+              {
+                "value": "4",
+                "label": "AI & 大模型"
+              },
+              {
+                "value": "5",
+                "label": "数据库"
+              },
+              {
+                "value": "6",
+                "label": "硬件 & IoT"
+              },
+              {
+                "value": "7",
+                "label": "信息安全"
+              },
+              {
+                "value": "8",
+                "label": "程序人生"
+              },
+              {
+                "value": "9",
+                "label": "DevOps"
+              },
+              {
+                "value": "10",
+                "label": "软件架构"
+              },
+              {
+                "value": "11",
+                "label": "开发技能"
+              },
+              {
+                "value": "12",
+                "label": "大前端"
+              },
+              {
+                "value": "13",
+                "label": "信息安全"
+              },
+              {
+                "value": "14",
+                "label": "软件测试 & 运维"
+              },
+              {
+                "value": "15",
+                "label": "网络技术"
+              },
+              {
+                "value": "16",
+                "label": "游戏开发"
+              },
+              {
+                "value": "17",
+                "label": "多媒体处理"
+              },
+              {
+                "value": "19",
+                "label": "操作系统"
+              },
+              {
+                "value": "9998",
+                "label": "开源资讯"
+              },
+              {
+                "value": "9999",
+                "label": "软件资讯"
+              }
+            ]
+          }
         },
         "features": {
           "requireConfig": false,
@@ -92132,9 +92221,9 @@
         "radar": [
           {
             "source": [
-              "oschina.net/news/:category"
+              "oschina.net"
             ],
-            "target": "/news/:category"
+            "target": "/news"
           }
         ],
         "name": "资讯",
@@ -92142,7 +92231,6 @@
           "tgly307",
           "zengxs"
         ],
-        "description": "| [综合资讯][osc_gen] | [软件更新资讯][osc_proj] | [行业资讯][osc_ind] | [编程语言资讯][osc_pl] |\n| ------------------- | ------------------------ | ------------------- | ---------------------- |\n| industry            | project                  | industry-news       | programming            |\n\n  订阅 [全部板块资讯][osc_all] 可以使用 [https://rsshub.app/oschina/news](https://rsshub.app/oschina/news)\n\n  [osc_all]: https://www.oschina.net/news \"开源中国 - 全部资讯\"\n\n  [osc_gen]: https://www.oschina.net/news/industry \"开源中国 - 综合资讯\"\n\n  [osc_proj]: https://www.oschina.net/news/project \"开源中国 - 软件更新资讯\"\n\n  [osc_ind]: https://www.oschina.net/news/industry-news \"开源中国 - 行业资讯\"\n\n  [osc_pl]: https://www.oschina.net/news/programming \"开源中国 - 编程语言资讯\"",
         "location": "news.ts",
         "module": "() => import('@/routes/oschina/news.ts')"
       },
@@ -92178,10 +92266,7 @@
         "module": "() => import('@/routes/oschina/topic.ts')"
       },
       "/u/:uid": {
-        "path": [
-          "/u/:uid",
-          "/user/:id"
-        ],
+        "path": "/u/:uid",
         "categories": [
           "programming"
         ],
@@ -92200,44 +92285,15 @@
         "radar": [
           {
             "source": [
-              "my.oschina.net/u/:uid"
+              "my.oschina.net/u/:uid",
+              "my.oschina.net/:uid"
             ]
           }
         ],
-        "name": "数字型账号用户博客",
-        "maintainers": [],
-        "location": "user.ts",
-        "module": "() => import('@/routes/oschina/user.ts')"
-      },
-      "/user/:id": {
-        "path": [
-          "/u/:uid",
-          "/user/:id"
+        "name": "用户博客",
+        "maintainers": [
+          "dxmpalb"
         ],
-        "categories": [
-          "programming"
-        ],
-        "example": "/oschina/u/3920392",
-        "parameters": {
-          "uid": "用户 id，可通过查看用户博客网址得到，以 u/数字结尾，数字即为 id"
-        },
-        "features": {
-          "requireConfig": false,
-          "requirePuppeteer": false,
-          "antiCrawler": false,
-          "supportBT": false,
-          "supportPodcast": false,
-          "supportScihub": false
-        },
-        "radar": [
-          {
-            "source": [
-              "my.oschina.net/u/:uid"
-            ]
-          }
-        ],
-        "name": "数字型账号用户博客",
-        "maintainers": [],
         "location": "user.ts",
         "module": "() => import('@/routes/oschina/user.ts')"
       }
