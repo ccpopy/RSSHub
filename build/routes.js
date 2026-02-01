@@ -29092,12 +29092,11 @@ export default {
       "/:id?/:type?/:keyword?": {
         "path": "/:id?/:type?/:keyword?",
         "url": "cool18.com",
-        "example": "cool18.com/bbs4",
+        "example": "/cool18/bbs4",
         "parameters": {
-          "id": "the name of the bbs",
-          "type": "the type of the post. Can be `home`, `gold` or `threadsearch`. Default: `home`",
-          "keyword": "the keyword to search.",
-          "pageSize": "the number of posts to fetch. If the type is not in search, you can type any words. Default: 10"
+          "id": "the name of the bbs, use `global` for site-wide search",
+          "type": "the type of the post. Can be `home`, `gold`, `threadsearch`. Default: `home`",
+          "keyword": "the keyword to search."
         },
         "categories": [
           "bbs"
