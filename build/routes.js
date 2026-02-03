@@ -48904,6 +48904,46 @@ export default {
     "description": "::: tip\nGitHub provides some official RSS feeds:\n\n-   Repo releases: `https://github.com/:owner/:repo/releases.atom`\n-   Repo commits: `https://github.com/:owner/:repo/commits.atom`\n-   User activities: `https://github.com/:user.atom`\n-   Private feed: `https://github.com/:user.private.atom?token=:secret` (Note: You can ONLY obtain this url via an [API](https://docs.github.com/en/rest/activity/feeds?apiVersion=2022-11-28) call with a [Personal Access Token](https://github.com/settings/tokens/new) with **ENOUGH** scopes now.)\n-   Wiki history: `https://github.com/:owner/:repo/wiki.atom`\n:::",
     "lang": "en"
   },
+  "gitkraken": {
+    "routes": {
+      "/release-note": {
+        "path": "/release-note",
+        "categories": [
+          "program-update"
+        ],
+        "example": "/gitkraken/release-note",
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "help.gitkraken.com/gitkraken-desktop/current/"
+            ]
+          },
+          {
+            "source": [
+              "www.gitkraken.com/"
+            ]
+          }
+        ],
+        "name": "Release Notes",
+        "maintainers": [
+          "TonyRL"
+        ],
+        "url": "help.gitkraken.com/gitkraken-desktop/current/",
+        "location": "release-note.ts",
+        "module": () => import('@/routes/gitkraken/release-note.ts')
+      }
+    },
+    "name": "GitKraken",
+    "url": "gitkraken.com"
+  },
   "gitpod": {
     "routes": {
       "/blog": {
@@ -91730,6 +91770,50 @@ export default {
     "url": "openai.com",
     "lang": "en"
   },
+  "openalex": {
+    "routes": {
+      "/:journals/:type?/:ids?": {
+        "path": "/:journals/:type?/:ids?",
+        "name": "Works",
+        "url": "openalex.org",
+        "maintainers": [
+          "emdoe"
+        ],
+        "example": "/openalex/s64187185/subfield/2604",
+        "parameters": {
+          "journals": "Pipe-separated journal source IDs (e.g., s64187185|s123456789)",
+          "type": "Optional filter type: subfield, topic, field, or domain",
+          "ids": "Optional pipe-separated filter IDs matching the type (e.g., 2604|2605 for subfields)"
+        },
+        "description": "Get recent scientific publications from OpenAlex filtered by journal and optionally by topic classification (last 2 weeks).\n\nExamples:\n- /openalex/s64187185 - All works from a journal (no topic filter)\n- /openalex/s64187185/subfield/2604 - Filter by subfield\n- /openalex/s64187185|s123456/topic/T10001|T10002 - Filter by topic with multiple journals\n- /openalex/s64187185/field/19 - Filter by field\n- /openalex/s64187185/domain/1 - Filter by domain",
+        "categories": [
+          "journal"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportRadar": true,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "openalex.org/works"
+            ],
+            "target": "/:journals/:type?/:ids?"
+          }
+        ],
+        "location": "works.ts",
+        "module": () => import('@/routes/openalex/works.ts')
+      }
+    },
+    "name": "OpenAlex",
+    "url": "openalex.org",
+    "lang": "en"
+  },
   "openrice": {
     "routes": {
       "/:lang/hongkong/explore/chart/:category": {
@@ -101083,6 +101167,47 @@ export default {
     "apiRoutes": {},
     "url": "www.qstheory.cn",
     "lang": "zh-CN"
+  },
+  "quantamagazine": {
+    "routes": {
+      "/archive": {
+        "path": "/archive",
+        "name": "Archive",
+        "url": "quantamagazine.org",
+        "maintainers": [
+          "emdoe"
+        ],
+        "example": "/quantamagazine/archive",
+        "parameters": {},
+        "description": "Get the latest articles from Quanta Magazine.",
+        "categories": [
+          "new-media"
+        ],
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportRadar": true,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "quantamagazine.org"
+            ],
+            "target": "/archive"
+          }
+        ],
+        "location": "archive.ts",
+        "module": () => import('@/routes/quantamagazine/archive.ts')
+      }
+    },
+    "name": "Quanta Magazine",
+    "apiRoutes": {},
+    "url": "quantamagazine.org",
+    "lang": "en"
   },
   "questmobile": {
     "routes": {

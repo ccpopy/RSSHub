@@ -1120,6 +1120,7 @@ export type RoutePath =
   | `/github/user/followers/:user`
   | `/github/user_event/:username/:types?`
   | `/github/wiki/:user/:repo/:page?`
+  | `/gitkraken/release-note`
   | `/gitpod/blog`
   | `/gitpod/changelog`
   | `/gitstar-ranking/:category?`
@@ -2114,6 +2115,7 @@ export type RoutePath =
   | `/openai/cookbook`
   | `/openai/news`
   | `/openai/research`
+  | `/openalex/:journals/:type?/:ids?`
   | `/openrice/:lang/hongkong/explore/chart/:category`
   | `/openrice/:lang/hongkong/offers`
   | `/openrice/:lang/hongkong/promos`
@@ -2309,6 +2311,7 @@ export type RoutePath =
   | `/qqorw/:category?`
   | `/qstheory/:category?`
   | `/qstheory/magazine/:magazine`
+  | `/quantamagazine/archive`
   | `/questmobile/report/:industry?/:label?`
   | `/questn/community/:communityUrl`
   | `/questn/events/:filter?`
