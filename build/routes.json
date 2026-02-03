@@ -26980,7 +26980,7 @@
         "maintainers": [
           "nczitzk"
         ],
-        "description": "| 即時 | 政治 | 國際 | 兩岸 | 產經 | 證券 | 科技 | 生活 | 社會 | 地方 | 文化 | 運動 | 娛樂 |\n| ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |\n| aall | aipl | aopl | acn  | aie  | asc  | ait  | ahel | asoc | aloc | acul | aspt | amov |",
+        "description": "| 聚焦      | 即時 | 政治 | 國際 | 兩岸 | 產經 | 證券 | 科技 | 生活 | 社會 | 地方 | 文化 | 運動 | 娛樂 |\n| --------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |\n| headlines | aall | aipl | aopl | acn  | aie  | asc  | ait  | ahel | asoc | aloc | acul | aspt | amov |",
         "location": "index.ts",
         "module": "() => import('@/routes/cna/index.ts')"
       },
@@ -41566,6 +41566,87 @@
     "apiRoutes": {},
     "url": "f-droid.org",
     "lang": "zh-CN"
+  },
+  "f95zone": {
+    "routes": {
+      "/post/:thread/:postId": {
+        "path": "/post/:thread/:postId",
+        "name": "Post",
+        "maintainers": [
+          "wsmbsbbz"
+        ],
+        "example": "/f95zone/post/vicineko-collection-2025-06-14-vicineko.84596/post-5909830",
+        "categories": [
+          "game"
+        ],
+        "description": "Track content changes of a specific post. Uses the date `[yyyy-mm-dd]` in title for update detection.\n\nURL format: `https://f95zone.to/threads/{thread}/#post-{id}` → replace `#` with `/` to get `/f95zone/post/{thread}/post-{id}`\n\nExample: `https://f95zone.to/threads/vicineko-collection-2025-06-14-vicineko.84596/#post-5909830` → `/f95zone/post/vicineko-collection-2025-06-14-vicineko.84596/post-5909830`\n\nNote: This route does not support Radar auto-detection because the post ID is in the URL hash (after `#`), which cannot be extracted by Radar. You need to manually construct the subscription URL.",
+        "parameters": {
+          "thread": "Thread slug with ID",
+          "postId": "Post ID with `post-` prefix, replace `#` with `/` from browser URL"
+        },
+        "features": {
+          "requireConfig": [
+            {
+              "name": "F95ZONE_COOKIE",
+              "optional": true,
+              "description": "F95zone cookie for accessing restricted content."
+            }
+          ],
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false,
+          "nsfw": true
+        },
+        "radar": [],
+        "location": "post.ts",
+        "module": "() => import('@/routes/f95zone/post.ts')"
+      },
+      "/thread/:thread": {
+        "path": "/thread/:thread",
+        "name": "Thread",
+        "maintainers": [
+          "wsmbsbbz"
+        ],
+        "example": "/f95zone/thread/ubermation-collection-2026-01-19-uebermation-uebermation.231247",
+        "categories": [
+          "game"
+        ],
+        "description": "Track replies in a thread. Fetches the first page and the last page.\n\nURL format: `https://f95zone.to/threads/{thread}/` → use `{thread}` as the parameter.\n\nExample: `https://f95zone.to/threads/ubermation-collection-2026-01-19-uebermation-uebermation.231247/` → `/f95zone/thread/ubermation-collection-2026-01-19-uebermation-uebermation.231247`\n\nNote: If you want to track a specific post's content changes (e.g., first post with download links), use the `/f95zone/post` route instead.",
+        "parameters": {
+          "thread": "Thread slug with ID, copy from browser URL after `/threads/`"
+        },
+        "features": {
+          "requireConfig": [
+            {
+              "name": "F95ZONE_COOKIE",
+              "optional": true,
+              "description": "F95zone cookie for accessing restricted content."
+            }
+          ],
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false,
+          "nsfw": true
+        },
+        "radar": [
+          {
+            "source": [
+              "f95zone.to/threads/:thread/*"
+            ],
+            "target": "/thread/:thread"
+          }
+        ],
+        "location": "thread.ts",
+        "module": "() => import('@/routes/f95zone/thread.ts')"
+      }
+    },
+    "name": "F95zone",
+    "url": "f95zone.to",
+    "description": "F95zone is a community for adult games and animations."
   },
   "famitsu": {
     "routes": {
