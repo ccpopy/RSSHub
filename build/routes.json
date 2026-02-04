@@ -66878,7 +66878,8 @@
         ],
         "url": "javtrailers.com/casts",
         "features": {
-          "nsfw": true
+          "nsfw": true,
+          "requirePuppeteer": true
         },
         "location": "casts.ts",
         "module": "() => import('@/routes/javtrailers/casts.ts')"
@@ -66905,7 +66906,8 @@
         ],
         "url": "javtrailers.com/categories",
         "features": {
-          "nsfw": true
+          "nsfw": true,
+          "requirePuppeteer": true
         },
         "location": "categories.ts",
         "module": "() => import('@/routes/javtrailers/categories.ts')"
@@ -66931,7 +66933,8 @@
           "TonyRL"
         ],
         "features": {
-          "nsfw": true
+          "nsfw": true,
+          "requirePuppeteer": true
         },
         "location": "studios.ts",
         "module": "() => import('@/routes/javtrailers/studios.ts')"
