@@ -22896,6 +22896,112 @@
     "description": "",
     "lang": "zh-CN"
   },
+  "ccmn": {
+    "routes": {
+      "/price-adjustment/:category": {
+        "path": "/price-adjustment/:category",
+        "categories": [
+          "other"
+        ],
+        "example": "/ccmn/price-adjustment/copper",
+        "parameters": {
+          "category": {
+            "description": "金属类别",
+            "options": [
+              {
+                "label": "铜",
+                "value": "copper"
+              },
+              {
+                "label": "铝",
+                "value": "alu"
+              },
+              {
+                "label": "锌",
+                "value": "zn"
+              },
+              {
+                "label": "锡",
+                "value": "sn"
+              },
+              {
+                "label": "铅",
+                "value": "pb"
+              },
+              {
+                "label": "镍",
+                "value": "ni"
+              }
+            ]
+          }
+        },
+        "radar": [
+          {
+            "source": [
+              "copper.ccmn.cn/:suffix",
+              "copper.ccmn.cn/:suffix/:subsuffix?"
+            ],
+            "target": "/price-adjustment/copper"
+          },
+          {
+            "source": [
+              "alu.ccmn.cn/:suffix",
+              "alu.ccmn.cn/:suffix/:subsuffix?"
+            ],
+            "target": "/price-adjustment/alu"
+          },
+          {
+            "source": [
+              "zn.ccmn.cn/:suffix",
+              "zn.ccmn.cn/:suffix/:subsuffix?"
+            ],
+            "target": "/price-adjustment/zn"
+          },
+          {
+            "source": [
+              "sn.ccmn.cn/:suffix",
+              "sn.ccmn.cn/:suffix/:subsuffix?"
+            ],
+            "target": "/price-adjustment/sn"
+          },
+          {
+            "source": [
+              "pb.ccmn.cn/:suffix",
+              "pb.ccmn.cn/:suffix/:subsuffix?"
+            ],
+            "target": "/price-adjustment/pb"
+          },
+          {
+            "source": [
+              "ni.ccmn.cn/:suffix",
+              "ni.ccmn.cn/:suffix/:subsuffix?"
+            ],
+            "target": "/price-adjustment/ni"
+          }
+        ],
+        "features": {
+          "supportRadar": true,
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false,
+          "nsfw": false
+        },
+        "name": "调价动态",
+        "maintainers": [
+          "chrisis58"
+        ],
+        "description": "长江有色网的金属调价动态，包括铜、铝、锌、锡、铅、镍等金属。",
+        "location": "price-adjustment.tsx",
+        "module": "() => import('@/routes/ccmn/price-adjustment.tsx')"
+      }
+    },
+    "name": "长江有色网",
+    "url": "www.ccmn.cn",
+    "lang": "zh-CN"
+  },
   "ccnu": {
     "routes": {
       "/career": {
