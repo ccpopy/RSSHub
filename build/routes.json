@@ -118579,6 +118579,45 @@
     "url": "tass.com",
     "lang": "en"
   },
+  "tctmd": {
+    "routes": {
+      "/conference-news": {
+        "path": "/conference-news",
+        "categories": [
+          "journal"
+        ],
+        "example": "/tctmd/conference-news",
+        "parameters": {},
+        "features": {
+          "requireConfig": false,
+          "requirePuppeteer": false,
+          "antiCrawler": false,
+          "supportBT": false,
+          "supportPodcast": false,
+          "supportScihub": false
+        },
+        "radar": [
+          {
+            "source": [
+              "www.tctmd.com/news/conference-news"
+            ]
+          }
+        ],
+        "name": "Conference News",
+        "maintainers": [
+          "ChuYinan2023"
+        ],
+        "url": "www.tctmd.com/news/conference-news",
+        "location": "conference-news.ts",
+        "module": "() => import('@/routes/tctmd/conference-news.ts')"
+      }
+    },
+    "name": "TCTMD",
+    "apiRoutes": {},
+    "url": "www.tctmd.com",
+    "description": "Cardiovascular news, education, and clinical trial coverage from the Cardiovascular Research Foundation",
+    "lang": "en"
+  },
   "techcrunch": {
     "routes": {
       "/category/:categoryId": {
