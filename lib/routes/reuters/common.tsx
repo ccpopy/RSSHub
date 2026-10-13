@@ -8,7 +8,7 @@ import cache from '@/utils/cache';
 import ofetch from '@/utils/ofetch';
 import { parseDate } from '@/utils/parse-date';
 
-type HeadingTag = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+const HEADING_TAGS = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] as const;
 
 type ReutersContent = {
     result: {
@@ -100,7 +100,7 @@ const renderDescription = ({ result }: ReutersContent): string => {
                 }
 
                 if (element.type === 'header') {
-                    const HeaderTag = `h${element.level ?? 1}` as HeadingTag;
+                    const HeaderTag = HEADING_TAGS.find((tag) => tag === `h${element.level ?? 1}`) ?? 'h6';
                     return <HeaderTag key={`header-${index}`}>{element.content ? raw(element.content) : null}</HeaderTag>;
                 }
 
@@ -265,10 +265,11 @@ async function handler(ctx) {
             items.map((item) =>
                 ctx.req.query('fulltext') === 'true'
                     ? cache.tryGet(item.link, async () => {
-                          const detailResponse = await ofetch(item.link, {
+                          const detailResponse = await ofetch.raw<string>(item.link, {
                               headers: browserHeaders,
                           });
-                          const content = load(detailResponse.data);
+                          const detailHtml = detailResponse._data ?? '';
+                          const content = load(detailHtml);
 
                           if (detailResponse.url.startsWith('https://www.reuters.com/investigates/')) {
                               const ldJson = JSON.parse(content('script[type="application/ld+json"]').text());
@@ -304,13 +305,17 @@ async function handler(ctx) {
                           content('.title').remove();
                           content('.article-metadata').remove();
 
-                          item.title = content('meta[property="og:title"]').attr('content');
-                          item.pubDate = parseDate(detailResponse.data.match(/"datePublished":"(.*?)","dateModified/)[1]);
-                          item.author = detailResponse.data
-                              .match(/\{"@type":"Person","name":"(.*?)"\}/g)
-                              .map((p) => p.match(/"name":"(.*?)"/)[1])
-                              .join(', ');
-                          item.description = content('article').html();
+                          item.title = content('meta[property="og:title"]').attr('content') || item.title;
+                          const publishedTime = detailHtml.match(/"datePublished":"(.*?)","dateModified/)?.[1];
+                          if (publishedTime) {
+                              item.pubDate = parseDate(publishedTime);
+                          }
+                          const authors = (detailHtml.match(/\{"@type":"Person","name":"(.*?)"\}/g) ?? []).flatMap((person) => {
+                              const name = person.match(/"name":"(.*?)"/)?.[1];
+                              return name ? [name] : [];
+                          });
+                          item.author = authors.join(', ') || item.author;
+                          item.description = content('article').html() || item.description;
 
                           return item;
                       })

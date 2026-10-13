@@ -10,7 +10,7 @@ import logger from '@/utils/logger';
 import ofetch from '@/utils/ofetch';
 import proxy from '@/utils/proxy';
 
-import { getClientTransactionId } from './client-transaction';
+import { getClientTransactionId } from './client-transaction-id';
 import { baseUrl, bearerToken, gqlFeatures, gqlMap, thirdPartySupportedAPI } from './constants';
 // import login from './login';
 
@@ -56,7 +56,7 @@ const token2Cookie = async (token) => {
 const lockPrefix = 'twitter:lock-token1:';
 
 const getAuth = async (retry: number) => {
-    if (!config.twitter.authToken || retry <= 0) {
+    if (!config.twitter.authToken?.length || retry <= 0) {
         return;
     }
     const index = authTokenIndex++ % config.twitter.authToken.length;
@@ -82,7 +82,6 @@ export const twitterGot = async (
     params,
     options?: {
         allowNoAuth?: boolean;
-        clientTransactionId?: string;
     }
 ) => {
     const auth = await getAuth(30);
@@ -149,6 +148,8 @@ export const twitterGot = async (
     // Because undici.fetch is the standard Fetch API and does not support ofetch's
     // `onResponse` callback, the rate-limit and auth error handling that was
     // previously in `onResponse` is now inlined below.
+    const pathname = new URL(url).pathname;
+    const clientTransactionId = /\/(?:UserTweetsAndReplies|SearchTimeline)$/.test(pathname) ? await getClientTransactionId('GET', pathname) : undefined;
     const response = await undici.fetch(requestUrl, {
         headers: {
             authority: 'x.com',
@@ -163,7 +164,6 @@ export const twitterGot = async (
             'x-twitter-active-user': 'yes',
             'x-twitter-client-language': 'en',
             'x-csrf-token': jsonCookie.ct0,
-            ...(options?.clientTransactionId && { 'x-client-transaction-id': options.clientTransactionId }),
             ...(auth?.token
                 ? {
                       'x-twitter-auth-type': 'OAuth2Session',
@@ -171,6 +171,9 @@ export const twitterGot = async (
                 : {
                       'x-guest-token': jsonCookie.gt,
                   }),
+            ...(clientTransactionId && {
+                'x-client-transaction-id': clientTransactionId,
+            }),
         },
         dispatcher: dispatchers?.agent,
     });
@@ -209,21 +212,12 @@ export const twitterGot = async (
             //     await cache.set(`twitter:cookie:${auth.token}`, newCookie, config.cache.contentExpire);
             //     await cache.set(`${lockPrefix}${auth.token}`, '', 1);
             // } else {
-            const tokenIndex = config.twitter.authToken?.indexOf(auth.token);
-            if (tokenIndex !== undefined && tokenIndex !== -1) {
-                config.twitter.authToken?.splice(tokenIndex, 1);
-            }
+            config.twitter.authToken = config.twitter.authToken?.filter((token) => token !== auth.token);
             // if (auth.username) {
-            //     const usernameIndex = config.twitter.username?.indexOf(auth.username);
-            //     if (usernameIndex !== undefined && usernameIndex !== -1) {
-            //         config.twitter.username?.splice(usernameIndex, 1);
-            //     }
+            //     config.twitter.username = config.twitter.username?.filter((username) => username !== auth.username);
             // }
             // if (auth.password) {
-            //     const passwordIndex = config.twitter.password?.indexOf(auth.password);
-            //     if (passwordIndex !== undefined && passwordIndex !== -1) {
-            //         config.twitter.password?.splice(passwordIndex, 1);
-            //     }
+            //     config.twitter.password = config.twitter.password?.filter((password) => password !== auth.password);
             // }
             logger.debug(`twitter debug: delete twitter cookie for token ${auth.token} with status ${response.status}, remaining tokens: ${config.twitter.authToken?.length}`);
             await cache.set(`${lockPrefix}${auth.token}`, '1', 3600);
@@ -263,9 +257,7 @@ export const paginationTweets = async (endpoint: string, userId: number | undefi
             });
             return data;
         }
-        const url = baseUrl + gqlMap[endpoint];
-        const clientTransactionId = endpoint === 'UserTweetsAndReplies' || endpoint === 'SearchTimeline' ? await getClientTransactionId('GET', new URL(url).pathname) : undefined;
-        const { data } = await twitterGot(url, params, { clientTransactionId });
+        const { data } = await twitterGot(baseUrl + gqlMap[endpoint], params);
         return data;
     };
 
@@ -294,10 +286,11 @@ export const paginationTweets = async (endpoint: string, userId: number | undefi
     }
 
     const moduleItems = instructions.find((i) => i.type === 'TimelineAddToModule')?.moduleItems;
-    const entries = instructions.find((i) => i.type === 'TimelineAddEntries')?.entries;
+    const entries = instructions.find((i) => i.type === 'TimelineAddEntries')?.entries ?? [];
     const gridEntries = entries.find((i) => i.entryId === 'profile-grid-0')?.content?.items;
 
-    return gridEntries || moduleItems || entries || [];
+    const pinnedEntries = instructions.filter((instruction) => instruction.type === 'TimelinePinEntry' && instruction.entry).map((instruction) => instruction.entry);
+    return new Map([...pinnedEntries, ...(gridEntries || moduleItems || entries)].map((entry) => [entry.entryId, entry])).values().toArray();
 };
 
 const hydrateLegacyUser = (legacy: any, tweet: any) => {
@@ -313,8 +306,30 @@ const hydrateLegacyUser = (legacy: any, tweet: any) => {
     };
 };
 
+const hydrateLegacyTweet = (tweet: any) => {
+    const legacy = tweet?.legacy;
+    if (!legacy) {
+        return;
+    }
+    hydrateLegacyUser(legacy, tweet);
+    legacy.id_str = tweet.rest_id || legacy.id_str;
+    const note = tweet.note_tweet?.note_tweet_results?.result;
+    if (typeof note?.text === 'string') {
+        legacy.full_text = note.text;
+        // Long posts have their own URL and mention entities. Keep legacy media metadata.
+        legacy.entities = { ...legacy.entities, ...note.entity_set };
+    }
+    const quote = tweet.quoted_status_result?.result?.tweet || tweet.quoted_status_result?.result;
+    if (!quote?.legacy) {
+        return;
+    }
+    hydrateLegacyTweet(quote);
+    legacy.quoted_status = quote.legacy;
+};
+
 export function gatherLegacyFromData(entries: any[], filterNested?: string[], userId?: number | string) {
     const tweets: any[] = [];
+    const contextTweets = new Map<string, any>();
     const filteredEntries: any[] = [];
     for (const entry of entries) {
         const entryId = entry.entryId;
@@ -368,22 +383,8 @@ export function gatherLegacyFromData(entries: any[], filterNested?: string[], us
             if (!t?.legacy) {
                 continue;
             }
-            hydrateLegacyUser(t.legacy, t);
-            t.legacy.id_str = t.rest_id; // avoid falling back to conversation_id_str elsewhere
-            const quote = t.quoted_status_result?.result?.tweet || t.quoted_status_result?.result;
-            if (quote?.legacy) {
-                t.legacy.quoted_status = quote.legacy;
-                hydrateLegacyUser(t.legacy.quoted_status, quote);
-            }
-            if (!t.note_tweet) {
-                continue;
-            }
-            const tmp = t.note_tweet.note_tweet_results.result;
-            t.legacy.entities.hashtags = tmp.entity_set.hashtags;
-            t.legacy.entities.symbols = tmp.entity_set.symbols;
-            t.legacy.entities.urls = tmp.entity_set.urls;
-            t.legacy.entities.user_mentions = tmp.entity_set.user_mentions;
-            t.legacy.full_text = tmp.text;
+            hydrateLegacyTweet(t);
+            contextTweets.set(t.legacy.id_str, t.legacy);
         }
         const legacy = tweet.legacy;
         if (!legacy) {
@@ -397,5 +398,11 @@ export function gatherLegacyFromData(entries: any[], filterNested?: string[], us
         }
     }
 
+    for (const tweet of contextTweets.values()) {
+        const parent = contextTweets.get(tweet.in_reply_to_status_id_str);
+        if (parent && parent !== tweet) {
+            tweet.in_reply_to_status = parent;
+        }
+    }
     return tweets;
 }
