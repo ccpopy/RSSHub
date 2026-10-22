@@ -5,8 +5,8 @@ const baseUrl = 'https://x.com/i/api';
 // Initial gqlMap from fallback IDs, updated dynamically via initGqlMap()
 let gqlMap: Record<string, string> = buildGqlMap(fallbackIds);
 
-const initGqlMap = async () => {
-    const queryIds = await resolveQueryIds();
+const initGqlMap = async (refresh = false) => {
+    const queryIds = await resolveQueryIds(refresh);
     gqlMap = buildGqlMap(queryIds);
 };
 
@@ -91,22 +91,6 @@ const gqlFeatures = {
     Likes: gqlFeatureFeed,
 };
 
-const timelineParams = {
-    include_can_media_tag: 1,
-    include_cards: 1,
-    include_entities: 1,
-    include_profile_interstitial_type: 0,
-    include_quote_count: 0,
-    include_reply_count: 0,
-    include_user_entities: 0,
-    include_ext_reply_count: 0,
-    include_ext_media_color: 0,
-    cards_platform: 'Web-13',
-    tweet_mode: 'extended',
-    send_error_codes: 1,
-    simple_quoted_tweet: 1,
-};
-
 const bearerToken = 'Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs%3D1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA';
 
-export { baseUrl, bearerToken, gqlFeatures, gqlMap, initGqlMap, thirdPartySupportedAPI, timelineParams };
+export { baseUrl, bearerToken, gqlFeatures, gqlMap, initGqlMap, thirdPartySupportedAPI };

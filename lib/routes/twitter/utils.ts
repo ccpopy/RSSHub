@@ -4,6 +4,14 @@ import { renderToString } from 'hono/jsx/dom/server';
 import { parseDate } from '@/utils/parse-date';
 import { fallback, queryToBoolean, queryToInteger } from '@/utils/readable-social';
 
+const getPublicationDate = (value?: string | number | Date): Date | undefined => {
+    if ((typeof value !== 'string' && typeof value !== 'number' && !(value instanceof Date)) || (typeof value === 'string' && !value.trim())) {
+        return undefined;
+    }
+    const date = parseDate(value);
+    return Number.isFinite(date.getTime()) ? date : undefined;
+};
+
 const getQueryParams = (url) => Object.fromEntries(new URL(url).searchParams.entries());
 const getOriginalImg = (url) => {
     // https://greasyfork.org/zh-CN/scripts/2312-resize-image-on-open-image-in-new-tab/code#n150
@@ -332,8 +340,9 @@ const ProcessFeed = (ctx, { data = [] }: { data?: any[] }, params: ProcessFeedPa
                         author.screen_name
                     }/status/${quoteData.id_str || quoteData.conversation_id_str}</a></small>`;
                 }
-                if (showTimestampInDescription) {
-                    quote += '<br><small>' + parseDate(quoteData.created_at);
+                const quoteDate = getPublicationDate(quoteData.created_at);
+                if (showTimestampInDescription && quoteDate) {
+                    quote += '<br><small>' + quoteDate;
                     quote += '</small>';
                     if (readable) {
                         quote += `<br clear='both' /><div style='clear: both'></div>`;
@@ -465,11 +474,12 @@ const ProcessFeed = (ctx, { data = [] }: { data?: any[] }, params: ProcessFeedPa
             description += `<br clear='both' /><div style='clear: both'></div>`;
         }
 
-        if (showTimestampInDescription) {
+        const itemDate = getPublicationDate(item.created_at);
+        if (showTimestampInDescription && itemDate) {
             if (readable) {
                 description += '<hr>';
             }
-            description += `<small>${parseDate(item.created_at)}</small>`;
+            description += `<small>${itemDate}</small>`;
         }
 
         const link =
@@ -486,7 +496,7 @@ const ProcessFeed = (ctx, { data = [] }: { data?: any[] }, params: ProcessFeedPa
                 },
             ],
             description: (mergedParams.includeReplyContext ? renderReplyContext(item) : '') + description,
-            pubDate: parseDate(mergedParams.useRetweetDate ? (originalItem.created_at ?? item.created_at) : item.created_at),
+            pubDate: getPublicationDate(mergedParams.useRetweetDate ? (originalItem.created_at ?? item.created_at) : item.created_at),
             link,
             guid: link.replace('x.com', 'twitter.com'),
             category,
@@ -556,7 +566,7 @@ const parseRouteParams = (routeParams) => {
     return { count, include_replies, include_rts, force_web_api, only_media };
 };
 
-export const excludeRetweet = function (tweets) {
+const excludeRetweet = function (tweets) {
     const excluded: any[] = [];
     for (const t of tweets) {
         if (t.retweeted_status) {
@@ -567,7 +577,7 @@ export const excludeRetweet = function (tweets) {
     return excluded;
 };
 
-export const keepOnlyMedia = function (tweets) {
+const keepOnlyMedia = function (tweets) {
     const excluded = tweets.filter((t) => t.extended_entities && t.extended_entities.media);
     return excluded;
 };

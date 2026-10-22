@@ -73,6 +73,7 @@ async function handler(ctx) {
     await api.init();
     const userInfo = await api.getUser(id);
     let data = await (include_replies ? api.getUserTweetsAndReplies(id, params) : api.getUserTweets(id, params));
+    const sourceCount = data.length;
     if (!include_rts) {
         data = utils.excludeRetweet(data);
     }
@@ -82,13 +83,13 @@ async function handler(ctx) {
     return {
         title: `Twitter @${userInfo?.name}`,
         link: `https://x.com/${userInfo?.screen_name}`,
-        image: profileImageUrl.replace(/_normal.jpg$/, '.jpg'),
+        image: profileImageUrl?.replace(/_normal.jpg$/, '.jpg'),
         description: userInfo?.description,
         item:
             data &&
             utils.ProcessFeed(ctx, {
                 data,
             }),
-        allowEmpty: true,
+        allowEmpty: !include_rts && sourceCount > 0 && data.length === 0,
     };
 }

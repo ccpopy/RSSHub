@@ -105,6 +105,7 @@ type ConfigEnvKeys =
     | 'BUKENAVI_EMAIL'
     | 'BUKENAVI_PASSWORD'
     | 'CAIXIN_COOKIE'
+    | 'CARA_COOKIE'
     | 'CIVITAI_COOKIE'
     | 'COOMER_ASSETS_URL'
     | 'COOMER_ROOT_URL'
@@ -160,6 +161,7 @@ type ConfigEnvKeys =
     | 'LORIENTLEJOUR_TOKEN'
     | 'LORIENTLEJOUR_USERNAME'
     | 'LORIENTLEJOUR_PASSWORD'
+    | 'LOWENDTALK_COOKIE'
     | 'MALAYSIAKINI_EMAIL'
     | 'MALAYSIAKINI_PASSWORD'
     | 'MALAYSIAKINI_REFRESHTOKEN'
@@ -200,6 +202,7 @@ type ConfigEnvKeys =
     | 'PKUBBS_COOKIE'
     | 'QINGTING_ID'
     | 'READWISE_ACCESS_TOKEN'
+    | 'REUTERS_AUTH_TOKEN'
     | 'SARABA1ST_COOKIE'
     | 'SARABA1ST_HOST'
     | 'SEHUATANG_COOKIE'
@@ -217,6 +220,7 @@ type ConfigEnvKeys =
     | 'SPOTIFY_CLIENT_SECRET'
     | 'SPOTIFY_REFRESHTOKEN'
     | 'SSPAI_BEARERTOKEN'
+    | 'TAOGUBA_COOKIE'
     | 'TELEGRAM_TOKEN'
     | 'TELEGRAM_SESSION'
     | 'TELEGRAM_API_ID'
@@ -410,6 +414,9 @@ export type Config = {
     caixin: {
         cookie?: string;
     };
+    cara: {
+        cookie?: string;
+    };
     civitai: {
         cookie?: string;
     };
@@ -546,6 +553,9 @@ export type Config = {
         username?: string;
         password?: string;
     };
+    lowendtalk: {
+        cookie?: string;
+    };
     malaysiakini: {
         email?: string;
         password?: string;
@@ -632,6 +642,9 @@ export type Config = {
     readwise: {
         accessToken?: string;
     };
+    reuters: {
+        authToken?: string;
+    };
     saraba1st: {
         cookie?: string;
         host?: string;
@@ -669,6 +682,9 @@ export type Config = {
     };
     sspai: {
         bearertoken?: string;
+    };
+    taoguba: {
+        cookie?: string;
     };
     telegram: {
         token?: string;
@@ -958,6 +974,9 @@ const calculateValue = () => {
         caixin: {
             cookie: envs.CAIXIN_COOKIE,
         },
+        cara: {
+            cookie: envs.CARA_COOKIE,
+        },
         civitai: {
             cookie: envs.CIVITAI_COOKIE,
         },
@@ -1094,6 +1113,9 @@ const calculateValue = () => {
             username: envs.LORIENTLEJOUR_USERNAME,
             password: envs.LORIENTLEJOUR_PASSWORD,
         },
+        lowendtalk: {
+            cookie: envs.LOWENDTALK_COOKIE,
+        },
         malaysiakini: {
             email: envs.MALAYSIAKINI_EMAIL,
             password: envs.MALAYSIAKINI_PASSWORD,
@@ -1180,6 +1202,9 @@ const calculateValue = () => {
         readwise: {
             accessToken: envs.READWISE_ACCESS_TOKEN,
         },
+        reuters: {
+            authToken: envs.REUTERS_AUTH_TOKEN,
+        },
         saraba1st: {
             cookie: envs.SARABA1ST_COOKIE,
             host: envs.SARABA1ST_HOST || 'https://stage1st.com',
@@ -1217,6 +1242,9 @@ const calculateValue = () => {
         },
         sspai: {
             bearertoken: envs.SSPAI_BEARERTOKEN,
+        },
+        taoguba: {
+            cookie: envs.TAOGUBA_COOKIE,
         },
         telegram: {
             token: envs.TELEGRAM_TOKEN,
