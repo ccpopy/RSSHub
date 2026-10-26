@@ -11,7 +11,7 @@ import logger from '@/utils/logger';
 import ofetch from '@/utils/ofetch';
 import proxy from '@/utils/proxy';
 
-import { getClientTransactionId } from './client-transaction-id';
+import { getClientTransactionId, refreshClientTransactionKeys } from './client-transaction-id';
 import { baseUrl, bearerToken, gqlFeatures, gqlMap, initGqlMap, thirdPartySupportedAPI } from './constants';
 // import login from './login';
 
@@ -222,11 +222,15 @@ export const twitterGot = async (
 
     if (response.status >= 400) {
         const operation = pathname.match(/^\/i\/api\/graphql\/[\w-]+\/(\w+)$/)?.[1];
-        // X rotates query IDs between builds. Refresh once and sign the new pathname.
+        // A 404 can mean either a rotated query ID or stale transaction materials.
         if (response.status === 404 && operation && options?.retryOnNotFound !== false && Object.hasOwn(gqlMap, operation)) {
             await initGqlMap(true);
             const refreshedUrl = baseUrl + gqlMap[operation];
-            if (refreshedUrl !== url) {
+            if (clientTransactionId) {
+                await refreshClientTransactionKeys();
+            }
+            if (refreshedUrl !== url || clientTransactionId) {
+                logger.info(`twitter: retrying ${operation} after refreshing request metadata`);
                 return twitterGot(refreshedUrl, params, { ...options, retryOnNotFound: false });
             }
         }

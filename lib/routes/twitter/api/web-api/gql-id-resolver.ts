@@ -68,7 +68,7 @@ let resolvePromise: Promise<Record<string, string>> | null = null;
 
 export async function resolveQueryIds(refresh = false): Promise<Record<string, string>> {
     // Check cache first
-    const cached = !refresh && (await cache.get(CACHE_KEY));
+    const cached = !refresh && (await cache.get(CACHE_KEY, false));
     if (cached) {
         try {
             const parsed: Record<string, string> = JSON.parse(cached);
