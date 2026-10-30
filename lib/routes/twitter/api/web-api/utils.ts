@@ -318,6 +318,9 @@ const hydrateLegacyTweet = (tweet: any) => {
     }
     hydrateLegacyUser(legacy, tweet);
     legacy.id_str = tweet.rest_id || legacy.id_str;
+    if (tweet.card) {
+        legacy.card = tweet.card.legacy || tweet.card;
+    }
     const note = tweet.note_tweet?.note_tweet_results?.result;
     if (typeof note?.text === 'string') {
         legacy.full_text = note.text;

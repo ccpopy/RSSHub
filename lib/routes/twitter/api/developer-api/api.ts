@@ -1,4 +1,4 @@
-import type { ApiV2Includes, MediaObjectV2, TweetEntityHashtagV2, TweetEntityMentionV2, TweetEntityUrlV2, TweetV2, TwitterApiReadOnly, UserV2 } from 'twitter-api-v2';
+import type { ApiV2Includes, MediaObjectV2, PollV2, TweetEntityHashtagV2, TweetEntityMentionV2, TweetEntityUrlV2, TweetV2, TwitterApiReadOnly, UserV2 } from 'twitter-api-v2';
 import { TwitterApi } from 'twitter-api-v2';
 
 import { config } from '@/config';
@@ -71,6 +71,7 @@ interface LegacyTweet {
     is_quote_status?: boolean;
     quoted_status?: LegacyTweet;
     in_reply_to_status?: LegacyTweet;
+    poll?: PollV2;
 }
 
 type DevApiParams = Record<string, string | number | boolean | undefined>;
@@ -205,6 +206,7 @@ const mapTweetToLegacy = (tweet: TweetV2, includes: ApiV2Includes | undefined, c
     const users = new Map((includes?.users ?? []).map((user) => [user.id, user]));
     const tweets = new Map((includes?.tweets ?? []).map((item) => [item.id, item]));
     const media = new Map((includes?.media ?? []).map((item) => [item.media_key, item]));
+    const polls = new Map((includes?.polls ?? []).map((item) => [item.id, item]));
 
     const user = users.get(tweet.author_id!);
     const legacyUser = mapUserToLegacy(user);
@@ -230,6 +232,7 @@ const mapTweetToLegacy = (tweet: TweetV2, includes: ApiV2Includes | undefined, c
         user: legacyUser,
         user_id_str: tweet.author_id,
         in_reply_to_user_id_str: tweet.in_reply_to_user_id,
+        poll: tweet.attachments?.poll_ids?.map((id) => polls.get(id)).find(Boolean),
     };
 
     cacheMap.set(tweet.id, legacy);
@@ -299,7 +302,7 @@ const cacheTryGet = async (_id: string, params: DevApiParams | undefined, operat
 
 const getUserTimeline = async (id: string, params?: DevApiParams, options: DevApiParams = {}) => {
     const count = Number(params?.count ?? 20);
-    const snapshotKey = `twitter:developer-timeline:${id}:${count}:${JSON.stringify(options)}`;
+    const snapshotKey = `twitter:developer-timeline:media-v2:${id}:${count}:${JSON.stringify(options)}`;
     const stored = await cache.get(snapshotKey, false);
     const previous: LegacyTweet[] = stored ? JSON.parse(stored) : [];
     let newestId = '0';
@@ -312,8 +315,9 @@ const getUserTimeline = async (id: string, params?: DevApiParams, options: DevAp
     const response = await client.v2.get(`users/${id}/tweets`, {
         max_results: count,
         ...(newestId !== '0' && { since_id: newestId }),
-        expansions: 'author_id,attachments.media_keys,referenced_tweets.id,referenced_tweets.id.author_id',
-        'tweet.fields': 'created_at,entities,conversation_id,referenced_tweets,author_id,in_reply_to_user_id,public_metrics',
+        expansions: 'author_id,attachments.media_keys,attachments.poll_ids,referenced_tweets.id,referenced_tweets.id.author_id',
+        'tweet.fields': 'created_at,entities,conversation_id,referenced_tweets,author_id,in_reply_to_user_id,public_metrics,attachments',
+        'poll.fields': 'options,end_datetime,voting_status',
         'user.fields': 'username,name,profile_image_url,description',
         'media.fields': 'preview_image_url,url,type,width,height,variants',
         ...options,
@@ -343,8 +347,9 @@ const getUserLikes = (id: string, params?: DevApiParams) =>
         const client = await getAppClient();
         const response = await client.v2.get(`users/${id}/liked_tweets`, {
             max_results: params.count ?? 20,
-            expansions: 'author_id,attachments.media_keys,referenced_tweets.id,referenced_tweets.id.author_id',
-            'tweet.fields': 'created_at,entities,conversation_id,referenced_tweets,author_id,in_reply_to_user_id,public_metrics',
+            expansions: 'author_id,attachments.media_keys,attachments.poll_ids,referenced_tweets.id,referenced_tweets.id.author_id',
+            'tweet.fields': 'created_at,entities,conversation_id,referenced_tweets,author_id,in_reply_to_user_id,public_metrics,attachments',
+            'poll.fields': 'options,end_datetime,voting_status',
             'user.fields': 'username,name,profile_image_url,description',
             'media.fields': 'preview_image_url,url,type,width,height,variants',
         });
@@ -359,8 +364,9 @@ const getUserTweet = (id: string, params?: DevApiParams) =>
             throw new InvalidParameterError('Tweet ID is required');
         }
         const response = await client.v2.get(`tweets/${tweetId}`, {
-            expansions: 'author_id,attachments.media_keys,referenced_tweets.id,referenced_tweets.id.author_id',
-            'tweet.fields': 'created_at,entities,conversation_id,referenced_tweets,author_id,in_reply_to_user_id,public_metrics',
+            expansions: 'author_id,attachments.media_keys,attachments.poll_ids,referenced_tweets.id,referenced_tweets.id.author_id',
+            'tweet.fields': 'created_at,entities,conversation_id,referenced_tweets,author_id,in_reply_to_user_id,public_metrics,attachments',
+            'poll.fields': 'options,end_datetime,voting_status',
             'user.fields': 'username,name,profile_image_url,description',
             'media.fields': 'preview_image_url,url,type,width,height,variants',
         });
@@ -375,8 +381,9 @@ const getSearch = (keywords: string, params?: DevApiParams) =>
             const response = await client.v2.get('tweets/search/recent', {
                 query: keywords,
                 max_results: params?.count ?? 20,
-                expansions: 'author_id,attachments.media_keys,referenced_tweets.id,referenced_tweets.id.author_id',
-                'tweet.fields': 'created_at,entities,conversation_id,referenced_tweets,author_id,in_reply_to_user_id,public_metrics',
+                expansions: 'author_id,attachments.media_keys,attachments.poll_ids,referenced_tweets.id,referenced_tweets.id.author_id',
+                'tweet.fields': 'created_at,entities,conversation_id,referenced_tweets,author_id,in_reply_to_user_id,public_metrics,attachments',
+                'poll.fields': 'options,end_datetime,voting_status',
                 'user.fields': 'username,name,profile_image_url,description',
                 'media.fields': 'preview_image_url,url,type,width,height,variants',
             });

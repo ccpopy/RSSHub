@@ -77,7 +77,37 @@ interface ProcessFeedParams {
     showFullPrefixForSubscriberOnly?: boolean;
 }
 
-const renderReplyContext = (tweet) => {
+const formatPoll = (item) => {
+    const card = item.card?.legacy || item.card;
+    const bindings = card?.binding_values;
+    const values = Array.isArray(bindings) ? Object.fromEntries(bindings.map(({ key, value }) => [key, value])) : bindings || {};
+    const options: Array<{ label: string; votes?: number }> = item.poll?.options
+        ? item.poll.options.map((option) => ({ label: option.label, votes: option.votes }))
+        : [1, 2, 3, 4]
+              .filter((index) => typeof values[`choice${index}_label`]?.string_value === 'string')
+              .map((index) => {
+                  const rawCount = values[`choice${index}_count`]?.string_value;
+                  return {
+                      label: values[`choice${index}_label`].string_value,
+                      votes: rawCount !== undefined && /^\d+$/.test(rawCount) ? Number(rawCount) : undefined,
+                  };
+              });
+    if (options.length < 2) {
+        return '';
+    }
+    const total = options.every((option) => Number.isSafeInteger(option.votes) && option.votes! >= 0) ? options.reduce((sum, option) => sum + option.votes!, 0) : undefined;
+    const end = getPublicationDate(item.poll?.end_datetime || values.end_datetime_utc?.string_value);
+    const closed = item.poll?.voting_status === 'closed' || values.counts_are_final?.boolean_value === true || values.counts_are_final?.string_value === 'true';
+    const rows = options.map((option) => {
+        const label = createElement('span', { class: 'rsshub-poll-label' }, option.label);
+        return createElement('li', { 'data-votes': option.votes }, label, option.votes === undefined ? '' : ` (${option.votes})`);
+    });
+    const list = createElement('ul', {}, ...rows);
+    const footer = createElement('small', {}, total === undefined ? 'Poll' : `${total} votes`, closed ? ' · Closed' : '');
+    return renderToString(createElement('div', { class: 'rsshub-poll', 'data-total-votes': total, 'data-ends-at': end?.toISOString(), 'data-closed': String(closed) }, list, footer));
+};
+
+const renderReplyContext = (tweet, formatAttachments) => {
     const parents: any[] = [];
     const seen = new Set([tweet.id_str]);
     let parent = tweet.in_reply_to_status;
@@ -100,7 +130,9 @@ const renderReplyContext = (tweet) => {
                     parent.user?.screen_name
                         ? createElement('a', { href: `https://x.com/${encodeURIComponent(parent.user.screen_name)}/status/${encodeURIComponent(parent.id_str)}` }, parent.user.name || parent.user.screen_name)
                         : undefined,
-                    createElement('p', { style: 'white-space: pre-wrap' }, parent.full_text || parent.text || '')
+                    parent.user?.profile_image_url_https ? createElement('img', { src: parent.user.profile_image_url_https, width: 32, height: 32 }) : undefined,
+                    createElement('p', { style: 'white-space: pre-wrap' }, formatText({ ...parent, full_text: parent.full_text || parent.text || '' }).replaceAll('<br>', '\n')),
+                    createElement('div', { dangerouslySetInnerHTML: { __html: formatAttachments(parent) } })
                 )
             )
         )
@@ -178,7 +210,7 @@ const ProcessFeed = (ctx, { data = [] }: { data?: any[] }, params: ProcessFeedPa
             if (!readable) {
                 content += '<br>';
             }
-            content += `<video width="${media.sizes.large.w}" height="${media.sizes.large.h}" src='${bestVideo.url}' ${gifAutoPlayAttr} controls='controls' poster='${getOriginalImg(media.media_url_https)}' ${extraAttrs}></video>`;
+            content += `<video width="${media.sizes.large.w}" height="${media.sizes.large.h}" src='${bestVideo.url}' ${gifAutoPlayAttr} controls='controls' poster='${getOriginalImg(media.media_url_https)}' ${media.expanded_url ? `data-rsshub-link='${media.expanded_url}'` : ''} ${extraAttrs}></video>`;
         }
 
         return content;
@@ -330,7 +362,7 @@ const ProcessFeed = (ctx, { data = [] }: { data?: any[] }, params: ProcessFeedPa
                 if (!readable) {
                     quote += '<br>';
                 }
-                quote += formatMedia(quoteData);
+                quote += formatMedia(quoteData) + formatPoll(quoteData);
                 picsPrefix += generatePicsPrefix(quoteData);
                 quoteInTitle += showEmojiForRetweetAndReply ? ' 💬 ' : showSymbolForRetweetAndReply ? ' RT ' : '';
                 quoteInTitle += `${author.name}: ${formatText(quoteData)}`;
@@ -461,14 +493,29 @@ const ProcessFeed = (ctx, { data = [] }: { data?: any[] }, params: ProcessFeedPa
             .match(/(\s)?(#[^\s;<]+)/g)
             ?.map((e) => e?.match(/#([^\s<]+)/)?.[1])
             .filter((e) => e !== undefined);
-        description += img;
+        description += img + formatPoll(item);
         description += quote;
         // Preserve the RSSX reply marker unless upstream's full conversation renderer is requested.
         const parent = !isRetweet && !mergedParams.includeReplyContext && item.in_reply_to_status;
         if (parent?.user) {
             const parentText = formatText({ ...parent, full_text: parent.full_text || parent.text || '' });
+            const parentAvatar = parent.user.profile_image_url_https ? createElement('img', { src: parent.user.profile_image_url_https, width: 32, height: 32 }) : undefined;
+            const parentContent = createElement('span', { style: 'white-space: pre-wrap' }, parentText.replaceAll('<br>', '\n'));
+            const parentAttachments = formatMedia(parent) + formatPoll(parent);
+            const attachments = createElement('div', { dangerouslySetInnerHTML: { __html: parentAttachments } });
             description += quoteSeparator;
-            description += `<div class="rsshub-reply">Replying to ${parent.user.name} (@${parent.user.screen_name}):&ensp;${parentText}</div>`;
+            description += renderToString(
+                createElement(
+                    'div',
+                    { class: 'rsshub-reply' },
+                    'Replying to ',
+                    createElement('a', { href: `https://x.com/${parent.user.screen_name}/status/${parent.id_str}` }, `${parent.user.name} (@${parent.user.screen_name})`),
+                    ':\u{2002}',
+                    parentAvatar,
+                    parentContent,
+                    attachments
+                )
+            );
         }
         if (readable) {
             description += `<br clear='both' /><div style='clear: both'></div>`;
@@ -486,6 +533,16 @@ const ProcessFeed = (ctx, { data = [] }: { data?: any[] }, params: ProcessFeedPa
             originalItem.user?.screen_name && (originalItem.id_str || originalItem.conversation_id_str)
                 ? `https://x.com/${originalItem.user?.screen_name}/status/${originalItem.id_str || originalItem.conversation_id_str}`
                 : `https://x.com/${item.user?.screen_name}/status/${item.id_str || item.conversation_id_str}`;
+        const relatedLinks: Array<{ url: string; type: string }> = [];
+        if (isRetweet) {
+            relatedLinks.push({ url: `https://x.com/${item.user?.screen_name}/status/${item.id_str || item.conversation_id_str}`, type: 'repost' });
+        }
+        if (item.is_quote_status && item.quoted_status?.user) {
+            relatedLinks.push({ url: `https://x.com/${item.quoted_status.user.screen_name}/status/${item.quoted_status.id_str || item.quoted_status.conversation_id_str}`, type: 'quote' });
+        }
+        if (item.in_reply_to_screen_name && item.in_reply_to_status_id_str) {
+            relatedLinks.push({ url: `https://x.com/${item.in_reply_to_screen_name}/status/${item.in_reply_to_status_id_str}`, type: 'reply' });
+        }
         return {
             title,
             author: [
@@ -495,38 +552,12 @@ const ProcessFeed = (ctx, { data = [] }: { data?: any[] }, params: ProcessFeedPa
                     avatar: originalItem.user?.profile_image_url_https,
                 },
             ],
-            description: (mergedParams.includeReplyContext ? renderReplyContext(item) : '') + description,
+            description: (mergedParams.includeReplyContext ? renderReplyContext(item, (parent) => formatMedia(parent) + formatPoll(parent)) : '') + description,
             pubDate: getPublicationDate(mergedParams.useRetweetDate ? (originalItem.created_at ?? item.created_at) : item.created_at),
             link,
             guid: link.replace('x.com', 'twitter.com'),
             category,
-            _extra:
-                (isRetweet && {
-                    links: [
-                        {
-                            url: `https://x.com/${item.user?.screen_name}/status/${item.conversation_id_str}`,
-                            type: 'repost',
-                        },
-                    ],
-                }) ||
-                (item.is_quote_status &&
-                    item.quoted_status?.user && {
-                        links: [
-                            {
-                                url: `https://x.com/${item.quoted_status?.user?.screen_name}/status/${item.quoted_status?.id_str || item.quoted_status?.conversation_id_str}`,
-                                type: 'quote',
-                            },
-                        ],
-                    }) ||
-                (item.in_reply_to_screen_name &&
-                    item.in_reply_to_status_id_str && {
-                        links: [
-                            {
-                                url: `https://x.com/${item.in_reply_to_screen_name}/status/${item.in_reply_to_status_id_str}`,
-                                type: 'reply',
-                            },
-                        ],
-                    }),
+            _extra: relatedLinks.length ? { links: relatedLinks } : undefined,
         };
     });
 };
@@ -582,7 +613,7 @@ const keepOnlyMedia = function (tweets) {
     return excluded;
 };
 
-export const getTwitterUserCacheKey = (id: string, operationName: string, params: Record<string, string | number | boolean | undefined> | undefined) => `twitter:${id}:${operationName}:${JSON.stringify(params)}`;
+export const getTwitterUserCacheKey = (id: string, operationName: string, params: Record<string, string | number | boolean | undefined> | undefined) => `twitter:media-v2:${id}:${operationName}:${JSON.stringify(params)}`;
 
 export default {
     ProcessFeed,

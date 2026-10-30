@@ -156,10 +156,16 @@ function gatherLegacyFromData(entries, filterNested?, userId?) {
             }
             t.legacy.user = t.core?.user_result?.result?.legacy || t.core?.user_results?.result?.legacy;
             t.legacy.id_str = t.rest_id; // avoid falling back to conversation_id_str elsewhere
+            if (t.card) {
+                t.legacy.card = t.card.legacy || t.card;
+            }
             const quote = t.quoted_status_result?.result;
             if (quote) {
                 t.legacy.quoted_status = quote.legacy;
                 t.legacy.quoted_status.user = quote.core.user_result?.result?.legacy || quote.core.user_results?.result?.legacy;
+                if (quote.card) {
+                    t.legacy.quoted_status.card = quote.card.legacy || quote.card;
+                }
             }
             if (!t.note_tweet) {
                 continue;
